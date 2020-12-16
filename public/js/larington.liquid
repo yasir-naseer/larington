@@ -2,15 +2,16 @@
   <script>
     $(document).ready(function(){
       var product_id = {{ product.id }};
-      var base_url = 'https://loyalty.test';
-       $.ajax({
-         url: `${base_url}/products/get/clubs/${product_id}`,
-         type: 'GET',
-         success: function(res) {
-           var response = res;
-           
-           $('.product-single__description').after(res);
-         }
-       });
+      var base_url = 'https://phpstack-490736-1648925.cloudwaysapps.com';
+      
+      $.ajax({
+        url: `${base_url}/products/get/clubs/${product_id}`,
+        type: 'GET',
+        success: function(res) {
+          var response = res;
+          
+          $('.product-single__description').after(res);
+        }
+      });
     });	
   </script>

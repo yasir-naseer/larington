@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Club;
+use App\Reward;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class ProductsController extends Controller
 {
@@ -54,10 +57,44 @@ class ProductsController extends Controller
 
     public function getClubsForProduct($id) {
        $product = Product::find($id);
-
        return view('products.club')->with('product',$product)->render();
-
     }
+
+    public function getClubsForCart(Request $request) {
+        
+        $products_ids = $request->products;
+
+        $clubs = array_unique(Reward::whereIn('product_id', $products_ids)->pluck('club_id')->toArray());
+
+        $data = [];
+        if(count($clubs) > 0) {
+            foreach($clubs as $club) {
+                array_push($data, [
+                    'club_name' => Club::where('club_id',$club)->first()->club_name,
+                    'club_id' => Club::where('club_id',$club)->first()->club_id,
+                    'points' => Reward::where('club_id', $club)->whereIn('product_id', $products_ids)->sum('reward_points')
+                ]);
+            }
+        }
+                      
+        return view('cart.clubs')
+        ->with('data', $data)
+        ->render();
+     }
+
+     public function cartApplyPoints(Request $request) {
+        $response = Http::asForm()->post('https://larington.com/api/', [
+            'command' => 'acceptpoints',
+            'platform' => '',
+            'posted_sid' => 'av0mcbl2guf1b2pql88c0d0bl6',
+            'club_id' => 93,
+            'company_id' => 146,
+            'memberphoneoremail' => 'yasirnaseer.0@gmail.com'
+        ]);
+
+        dd($response->body());
+
+     }
 
     /**
      * Show the form for editing the specified resource.
