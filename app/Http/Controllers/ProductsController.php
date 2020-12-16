@@ -89,7 +89,8 @@ class ProductsController extends Controller
             'posted_sid' => 'av0mcbl2guf1b2pql88c0d0bl6',
             'club_id' => 93,
             'company_id' => 146,
-            'memberphoneoremail' => 'yasirnaseer.0@gmail.com'
+            'memberphoneoremail' => 'testmerchant@larington.com',
+            'points' => 10
         ]);
 
         dd($response->body());
