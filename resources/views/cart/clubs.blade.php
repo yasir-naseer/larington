@@ -30,9 +30,24 @@
                             @endforeach
                         </select>
                         <input class="point-applied" type="number" placeholder="Enter number of points to spend">
+                        <input class="member" type="text" placeholder="Enter your email/phone">
                         <button type="button" class="point-apply-btn" style="background: #d9534f;padding: 10px 15px;color: white;border: 0;">Pay with points</button>
                    </form>
+                   <br>
+                   <span style="font-size: 14px; color: #d9534f; display:none;" class="request-error"></span>
                </td>
+               <td style="text-align:right; display:none;" class="apply-pin-div">
+                   <form action="{{ route('cart.apply.pin') }}" method="POST">
+                        <input type="hidden" class="club_id" val="">
+                        <input class="point-applied"  val="" readonly>
+                        <input class="member" type="hidden" val="">
+                        <input class="pin" type="text" placeholder="Enter your PIN">
+                        <button type="button" class="pin-apply-btn" style="background: #53a993;padding: 10px 15px;color: white;border: 0;">Apply PIN</button>
+                   </form>
+                   <br>
+                   <span style="font-size: 14px; color: #53a993;" class="request-success"></span>
+               </td>
+               
             </tr>
     </tbody>
 </table>

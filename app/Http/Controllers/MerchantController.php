@@ -56,7 +56,6 @@ class MerchantController extends Controller
             $user = Auth::user();
             $user->merchant_id = $result->user_id;
             $user->sid = $result->sid;
-            $user->merchant_id = $result->user_id;
             $user->merchant_token = $result->token;
             $user->save();
 

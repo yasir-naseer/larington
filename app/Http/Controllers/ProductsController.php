@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Club;
+use App\User;
 use App\Reward;
 use App\Product;
 use Illuminate\Http\Request;
@@ -83,18 +84,88 @@ class ProductsController extends Controller
      }
 
      public function cartApplyPoints(Request $request) {
+        $club = Club::where('club_id', $request->club_id)->first();
+        $user = User::find($club->store_id);
+
         $response = Http::asForm()->post('https://larington.com/api/', [
             'command' => 'acceptpoints',
             'platform' => '',
-            'posted_sid' => 'av0mcbl2guf1b2pql88c0d0bl6',
-            'club_id' => 93,
-            'company_id' => 146,
-            'memberphoneoremail' => 'testmerchant@larington.com',
-            'points' => 10
+            'posted_sid' => $user->merchant_token,
+            'clubid' => $club->club_id,
+            'merchid' => $club->company_id,
+            'memberphoneoremail' => $request->member,
+            'points' => $request->points
+        ]);
+
+        
+        $result = json_decode($response->body(), 1);
+
+
+        if($result['res'] == 2) {
+            return response()->json([
+                'success' => $result['message'],
+                'club_id' => $club->club_id,
+                'member' => $request->member,
+                'points' => $request->points
+            ]);
+        }
+        else if($result['res'] == -1) {
+            return response()->json(['error' => $result['message']]);
+        }
+        else {
+            return response()->json(['error' => $result['res']]);
+        }
+     }
+
+     public function cartApplyPin(Request $request) {
+        $club = Club::where('club_id', $request->club_id)->first();
+        $user = User::find($club->store_id);
+
+        $response = Http::asForm()->post('https://larington.com/api/', [
+            'command' => 'acceptpoints',
+            'platform' => '',
+            'posted_sid' => $user->merchant_token,
+            'clubid' => $club->club_id,
+            'merchid' => $club->company_id,
+            'memberphoneoremail' => $request->member,
+            'points' => $request->points,
+            'consumerpin' => $request->pin
+        ]);
+
+        // $response = Http::asForm()->post('https://larington.com/api/', [
+        //     'command' => 'acceptpoints',
+        //     'platform' => '',
+        //     'posted_sid' => 'kn0pj65lenn7m9ccospjfo8gg6',
+        //     'clubid' => '93',
+        //     'merchid' => '146',
+        //     'memberphoneoremail' => 'yasirnaseer.0@gmail.com',
+        //     'points' => '2',
+        //     'consumerpin' => '5886'
+        // ]);
+
+        
+        $result = json_decode($response->body(), 1);
+
+        if($result['res'] == 1) {
+            return response()->json(['success' => $result['message']]);
+        }
+        else if($result['res'] == -1) {
+            return response()->json(['error' => $result['message']]);
+        }
+     }
+
+     public function submitOrder(Request $request) {
+          $response = Http::asForm()->post('https://larington.com/api/', [
+            'command' => 'issuepoints',
+            'platform' => 'shopifyapp',
+            'posted_sid' => 'kn0pj65lenn7m9ccospjfo8gg6',
+            'clubid' => '93',
+            'merchid' => '146',
+            'memberphoneoremail' => 'yasirnaseer.0@gmail.com',
+            'points' => '20',
         ]);
 
         dd($response->body());
-
      }
 
     /**

@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'paths' => ['/products/get/clubs/*', '/cart/get/clubs', '/cart/apply/points'],
+    'paths' => ['/products/get/clubs/*', '/cart/get/clubs', '/cart/apply/points', '/cart/apply/pin'],
 
     'allowed_methods' => ['*'],
 
