@@ -52,20 +52,13 @@ class ProductsUpdateJob implements ShouldQueue
     {
         // $this->shopDomain = ShopDomain::fromNative($this->domain);
 
-        $log = new ErrorLog();
-        $log->message = 'HO';
-        $log->save();
-
+    
         try{
-            $log = new ErrorLog();
-            $log->message = "befod". $this->shopDomain;
-            $log->save();
+           
 
-            $shop = User::where('name', $this->shopDomain->toNative())->first();
+            $shop = User::where('name', $this->shopDomain)->first();
           
-            $log = new ErrorLog();
-            $log->message = "aFTER";
-            $log->save();
+           
             if (Product::where('id', $this->data->id)->exists()) {
                 $p = Product::find($this->data->id);
             } else {
@@ -79,6 +72,12 @@ class ProductsUpdateJob implements ShouldQueue
             $p->image = $this->data->image;
             $p->store_id = $shop->id;
             $p->save(); 
+
+            $log = new ErrorLog();
+            $log->message = "aFTER";
+            $log->save();
+
+            
         }
         catch(\Exception $e)
         {
