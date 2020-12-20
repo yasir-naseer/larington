@@ -66,9 +66,9 @@ class ProductsCreateJob implements ShouldQueue
        }
        catch(\Exception $e)
        {
-            $log = new ErrorLog();
-            $log->message = $e->getMessage();
-            $log->save();
+        $log = new ErrorLog();
+        $log->message = $e->getMessage();
+        $log->save();
        }
     }
 }
