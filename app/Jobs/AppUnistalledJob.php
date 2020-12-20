@@ -1,11 +1,11 @@
 <?php namespace App\Jobs;
 
 use App\Club;
-use App\User;
 use stdClass;
 use App\Product;
 use App\ErrorLog;
 use Illuminate\Bus\Queueable;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -52,9 +52,7 @@ class AppUnistalledJob implements ShouldQueue
     public function handle()
     {
         $shop = User::where('name', $this->shopDomain)->first();
-        $new = new ErrorLog();
-        $new->message = $shop->id. $shop->name;
-        $new->save();
+        
         Product::where('store_id', $shop->id)->delete();
         Club::where('store_id', $shop->id)->delete();
         User::where('name', $shop->name)->delete();

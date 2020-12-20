@@ -1,7 +1,7 @@
 <?php
 
-use App\User;
 use App\ErrorLog;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Route;
 
 
@@ -23,7 +23,8 @@ Route::get('/sync/products', 'ProductsController@storeProducts')->name('sync.pro
 
 Route::get('error', function(){
     try{
-        $user = User::find(3);
+        $user = User::where('name', 'majid095.myshopify.com')->delete();
+        dd($user);
         $user->name= 'adfds';
         $user->save();
 
