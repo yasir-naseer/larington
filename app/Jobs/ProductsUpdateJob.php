@@ -50,7 +50,7 @@ class ProductsUpdateJob implements ShouldQueue
      */
     public function handle()
     {
-        $this->shopDomain = ShopDomain::fromNative($this->domain);
+        // $this->shopDomain = ShopDomain::fromNative($this->domain);
 
         $log = new ErrorLog();
         $log->message = 'HEHEHEHEHE';
