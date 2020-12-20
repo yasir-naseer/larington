@@ -69,11 +69,11 @@ class ProductsUpdateJob implements ShouldQueue
 
 
             $log = new ErrorLog();
-            $log->message = 'HIOO'.$this->data->title;
+            $log->message = 'DAF'.$this->data->title;
             $log->save();
 
             $log = new ErrorLog();
-            $log->message = json_encode($this->data);
+            $log->message = json_encode($this->data->image->src);
             $log->save();
 
             $log = new ErrorLog();
