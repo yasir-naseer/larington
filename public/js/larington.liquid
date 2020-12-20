@@ -35,17 +35,15 @@
          }
        });
       
-      
-      
-      $(document).on('click', '.point-apply-btn', function(){
+         $(document).on('click', '.point-apply-btn', function(){
                                
         $('.request-error').hide();
+        $(this).html('Loading..');
         
       	var club_id = $('.point-apply-club').val();
         var points = $('.point-applied').val();
         var member = $('.member').val();
         
-        console.log(club_id, points, member);
         
         $.ajax({
           url: `${base_url}/cart/apply/points`,
@@ -55,10 +53,12 @@
             var response = res;
             
             if(response.error){
+                $('.point-apply-btn').html('Pay with points');
             	$('.request-error').show().slideDown().html(response.error);
+               
+
             }
             else if(response.success){
-              	console.log(213);
             	$('.apply-point-div').hide();
                 $('.apply-pin-div').show();
                 $('.request-success').html(response.success);
@@ -76,6 +76,7 @@
       
       $(document).on('click', '.pin-apply-btn', function(){
         $('.request-success').hide();
+        $('.pin-apply-btn').html('Loading..');
         
       	var club_id = $('.club_id').val();
         var points = $('.point-applied').val();
@@ -91,11 +92,13 @@
             
             if(response.error){
                 $('.apply-pin-div').hide();
+                $('.pin-apply-btn').html('APPLY PIN');
                 $('.apply-point-div').show();
             	$('.request-error').show().slideDown().html(response.error);
             }
             else if(response.success){
             	$('.apply-point-div').hide();
+                $('.pin-apply-btn').html('APPLY PIN');
                 $('.apply-pin-div').show();
                 $('.request-success').html(response.success);
                 $('.request-success').show();

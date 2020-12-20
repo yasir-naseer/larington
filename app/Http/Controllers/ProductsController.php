@@ -159,7 +159,7 @@ class ProductsController extends Controller
             'clubid' => '93',
             'merchid' => '146',
             'memberphoneoremail' => 'yasirnaseer.0@gmail.com',
-            'points' => '50',
+            'points' => '500',
         ]);
 
         dd($response->body());
