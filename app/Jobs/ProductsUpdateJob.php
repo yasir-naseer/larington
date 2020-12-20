@@ -51,13 +51,13 @@ class ProductsUpdateJob implements ShouldQueue
     public function handle()
     {
         $log = new ErrorLog();
-        $log->message = 'hello';
+        $log->message = 'HEHE';
         $log->save();
 
         try{
             $shop = User::where('name', $this->shopDomain->toNative())->first();
             $log = new ErrorLog();
-        $log->message = $this->shopDomain->toNative();
+        $log->message = "shop";
         $log->save();
             if (Product::where('id', $this->data->id)->exists()) {
                 $p = Product::find($this->data->id);
