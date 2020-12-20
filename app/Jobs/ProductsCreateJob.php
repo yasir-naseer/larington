@@ -52,6 +52,9 @@ class ProductsCreateJob implements ShouldQueue
     {
        try{
         $shop = User::where('name', $this->shopDomain->toNative())->first();
+        $log = new ErrorLog();
+        $log->message = $this->shopDomain->toNative();
+        $log->save();
         if (Product::where('id', $this->data->id)->exists()) {
             $p = Product::find($this->data->id);
         } else {
