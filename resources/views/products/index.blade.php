@@ -14,11 +14,14 @@
             <form action="" method="GET" >
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" class="form-control form-control-alt" id="one-ecom-products-search" name="search" value="{{ $search}}" placeholder="Search all products..">
+                        <input type="text" class="form-control form-control-alt" id="" name="search" value="{{ $search}}" placeholder="Search all products..">
                         <div class="input-group-append">
-                            <span class="input-group-text bg-body border-0">
+                            <button class="input-group-text bg-body border-0">
                                 <i class="fa fa-search"></i>
-                            </span>
+                            </button>
+                            <a href="{{ route('products.index') }}" class="input-group-text bg-danger border-0 btn ">
+                                Clear
+                            </a>
                         </div>
                     </div>
                 </div>
