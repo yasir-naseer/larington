@@ -3,6 +3,7 @@
 use App\User;
 use stdClass;
 use App\Product;
+use App\ErrorLog;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -62,12 +63,12 @@ class ProductsUpdateJob implements ShouldQueue
             $p->image = $this->data->image;
             $p->store_id = $shop->id;
             $p->save(); 
-           }
-           catch(\Exception $e)
-           {
-            $log = new ErrorLog();
-            $log->message = 'hello';
-            $log->save();
-           }
+        }
+        catch(\Exception $e)
+        {
+        $log = new ErrorLog();
+        $log->message = 'hello';
+        $log->save();
+        }
     }
 }
