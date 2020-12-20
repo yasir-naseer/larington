@@ -50,11 +50,7 @@ class ProductsUpdateJob implements ShouldQueue
      */
     public function handle()
     {
-        // $this->shopDomain = ShopDomain::fromNative($this->domain);
-
-    
-        try{
-    
+        
             $shop = User::where('name', $this->shopDomain)->first();
           
             if (Product::where('id', $this->data->id)->exists()) {
@@ -62,49 +58,13 @@ class ProductsUpdateJob implements ShouldQueue
             } else {
                 $p = new Product();
             }
-
-             $log = new ErrorLog();
-            $log->message = 'hiii';
-            $log->save();
-
-
-            $log = new ErrorLog();
-            $log->message = 'DAF'.$this->data->title;
-            $log->save();
-
-            $log = new ErrorLog();
-            $log->message = json_encode($this->data->image->src);
-            $log->save();
-
-            $log = new ErrorLog();
-            $log->message = 'dasf'.json_encode($this->data->image);
-            $log->save();
-
             
-            $log = new ErrorLog();
-            $log->message = 'dsf'.$shop->id;
-            $log->save();
-
-
-    
-            $p->id = $this->data->id;
+        $p->id = $this->data->id;
             $p->title = $this->data->title;
             $p->image = json_encode($this->data->image);
             $p->store_id = $shop->id;
             $p->save(); 
-
-            $log = new ErrorLog();
-            $log->message = 'werw';
-            $log->save();
-           
-
-            
-        }
-        catch(\Exception $e)
-        {
-            $log = new ErrorLog();
-            $log->message = "Crap";
-            $log->save();
-        }
+                
+        
     }
 }
