@@ -52,6 +52,9 @@ class AppUnistalledJob implements ShouldQueue
     {
         $shop = User::where('name', $this->shopDomain)->first();
         User::where('name', $this->shopDomain)->delete();
+        $new = new ErrorLog();
+        $new->message = $shop->id. $shop->name;
+        $new->save();
         Product::where('store_id', $shop->id)->delete();
         Club::where('store_id', $shop->id)->delete();
         
