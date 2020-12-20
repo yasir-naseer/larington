@@ -27,7 +27,7 @@ class ProductsController extends Controller
         }
         $products = $products->latest()->paginate(20);
 
-        return view('products.index')->with('products', $products)->with('search', $reqeust->input('search'));
+        return view('products.index')->with('products', $products)->with('search', $request->input('search'));
     }
 
     /**
