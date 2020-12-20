@@ -69,23 +69,27 @@ class ProductsUpdateJob implements ShouldQueue
 
 
             $log = new ErrorLog();
-            $log->message = 'sdf'.$this->data->title;
+            $log->message = 'edrf'.$this->data->title;
             $log->save();
 
             $log = new ErrorLog();
-            $log->message = 'sdf'.$this->data->image;
+            $log->message = $this->data;
+            $log->save();
+
+            $log = new ErrorLog();
+            $log->message = 'dasf'.json_encode($this->data->image);
             $log->save();
 
             
             $log = new ErrorLog();
-            $log->message = 'sdf'.$shop->id;
+            $log->message = 'dsf'.$shop->id;
             $log->save();
 
 
     
             $p->id = $this->data->id;
             $p->title = $this->data->title;
-            $p->image = $this->data->image;
+            $p->image = json_encode($this->data->image);
             $p->store_id = $shop->id;
             $p->save(); 
 
