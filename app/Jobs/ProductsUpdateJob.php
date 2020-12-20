@@ -63,14 +63,6 @@ class ProductsUpdateJob implements ShouldQueue
                 $p = new Product();
             }
 
-
-    
-            $p->id = $this->data->id;
-            $p->title = $this->data->title;
-            $p->image = $this->data->image;
-            $p->store_id = $shop->id;
-            $p->save(); 
-
             $log = new ErrorLog();
             $log->message = 'hiii';
             $log->save();
@@ -79,6 +71,15 @@ class ProductsUpdateJob implements ShouldQueue
             $log = new ErrorLog();
             $log->message = 'sdf'.$this->data->id;
             $log->save();
+
+    
+            $p->id = $this->data->id;
+            $p->title = $this->data->title;
+            $p->image = $this->data->image;
+            $p->store_id = $shop->id;
+            $p->save(); 
+
+           
 
             
         }
