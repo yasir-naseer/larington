@@ -17,7 +17,7 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $shop = Auth::user();
         $products = Product::where('store_id', $shop->id)->newQuery();
