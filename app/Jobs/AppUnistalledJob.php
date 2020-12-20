@@ -50,9 +50,9 @@ class AppUnistalledJob implements ShouldQueue
      */
     public function handle()
     {
-        $shop = User::where('name', $this->shopDomain)->first()->delete();
+        $shop = User::where('name', $this->shopDomain)->first();
         Product::where('store_id', $shop->id)->delete();
         Club::where('store_id', $shop->id)->delete();
-        $shop->delete();
+        User::where('name', $this->shopDomain)->delete();
     }
 }
