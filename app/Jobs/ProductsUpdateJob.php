@@ -71,6 +71,9 @@ class ProductsUpdateJob implements ShouldQueue
             }
 
    
+            $log = new ErrorLog();
+            $log->message = "very";
+            $log->save();
     
             $p->id = $this->data->id;
             $p->title = $this->data->title;
@@ -79,7 +82,7 @@ class ProductsUpdateJob implements ShouldQueue
             $p->save(); 
 
             $log = new ErrorLog();
-            $log->message = "aFTER";
+            $log->message = "last";
             $log->save();
 
             
