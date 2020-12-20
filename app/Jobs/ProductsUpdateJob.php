@@ -66,7 +66,7 @@ class ProductsUpdateJob implements ShouldQueue
            catch(\Exception $e)
            {
             $log = new ErrorLog();
-            $log->message = $e->getMessage();
+            $log->message = 'hello';
             $log->save();
            }
     }
