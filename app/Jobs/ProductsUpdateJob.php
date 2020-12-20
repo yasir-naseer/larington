@@ -53,7 +53,7 @@ class ProductsUpdateJob implements ShouldQueue
         $this->shopDomain = ShopDomain::fromNative($this->domain);
 
         $log = new ErrorLog();
-        $log->message = 'HEHE';
+        $log->message = 'HEHEHEHEHE';
         $log->save();
 
         try{
