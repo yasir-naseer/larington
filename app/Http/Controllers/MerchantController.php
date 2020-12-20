@@ -79,11 +79,11 @@ class MerchantController extends Controller
                         else {
                             $club = new Club();
                         }
+                        $club->club_id = $c['clubid'];
                         $club->company_id = $company['companyid'];
                         $club->company_name = $company['dtitlos'];
-                        $club->club_id = $c['clubid'];
                         $club->club_name = $c['clubname'];
-                        $club->deposited_amount = $c['depositedamount'];
+                        //$club->deposited_amount = $c['depositedamount'];
                         $club->store_id = Auth::user()->id;
                         $club->save();
                     }

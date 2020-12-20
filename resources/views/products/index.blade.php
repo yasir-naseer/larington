@@ -19,7 +19,7 @@
                             <button class="input-group-text bg-body border-0">
                                 <i class="fa fa-search"></i>
                             </button>
-                            <a href="{{ route('products.index') }}" class="input-group-text bg-danger border-0 btn ">
+                            <a href="{{ route('products.index') }}" class="input-group-text bg-danger border-0 btn text-white">
                                 Clear
                             </a>
                         </div>
