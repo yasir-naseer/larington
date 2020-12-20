@@ -64,12 +64,12 @@ class ProductsUpdateJob implements ShouldQueue
             }
 
             $log = new ErrorLog();
-            $log->message = 'hiii';
+            $log->message = 'HSHS';
             $log->save();
 
 
             $log = new ErrorLog();
-            $log->message = 'sdf'.$this->data->id;
+            $log->message = 'sdf'.$this->data['id'];
             $log->save();
 
     
