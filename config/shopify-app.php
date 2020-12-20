@@ -303,13 +303,22 @@ return [
     */
 
     'webhooks' => [
-        /*
-            [
-                'topic' => env('SHOPIFY_WEBHOOK_1_TOPIC', 'orders/create'),
-                'address' => env('SHOPIFY_WEBHOOK_1_ADDRESS', 'https://some-app.com/webhook/orders-create')
-            ],
-            ...
-        */
+        [
+            'topic' => 'products/create',
+            'address' => 'https://phpstack-490736-1648925.cloudwaysapps.com/webhook/products-create'
+        ],
+        [
+            'topic' => 'products/update',
+            'address' => 'https://phpstack-490736-1648925.cloudwaysapps.com/webhook/products-update'
+        ],
+        [
+            'topic' => 'products/delete',
+            'address' => 'https://phpstack-490736-1648925.cloudwaysapps.com/webhook/products-delete'
+        ],
+        [
+            'topic' => 'app/uninstalled',
+            'address' => 'https://phpstack-490736-1648925.cloudwaysapps.com/webhook/app-unistalled'
+        ]
     ],
 
     /*

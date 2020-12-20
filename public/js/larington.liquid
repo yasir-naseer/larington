@@ -1,17 +1,118 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script>
     $(document).ready(function(){
-      var product_id = {{ product.id }};
-      var base_url = 'https://phpstack-490736-1648925.cloudwaysapps.com';
+      {%- if product.id %}  
+        var product_id = {{ product.id | null }};
+        var base_url = 'https://phpstack-490736-1648925.cloudwaysapps.com';
+
+         $.ajax({
+           url: `${base_url}/products/get/clubs/${product_id}`,
+           type: 'GET',
+           success: function(res) {
+             var response = res;
+
+             $('.product-single__description').after(res);
+           }
+         });
+      {%- endif -%}
       
-      $.ajax({
-        url: `${base_url}/products/get/clubs/${product_id}`,
-        type: 'GET',
-        success: function(res) {
-          var response = res;
-          
-          $('.product-single__description').after(res);
-        }
+      
+      var base_url = 'https://phpstack-490736-1648925.cloudwaysapps.com';
+      var products = [];
+      
+      {% for item in cart.items %}
+          products.push({{item.product.id}});
+      {% endfor %}
+      
+       $.ajax({
+         url: `${base_url}/cart/get/clubs`,
+         data: { products : products },
+         type: 'POST',
+         success: function(res) {
+           var response = res;
+           $('.clubs').html(res);
+
+         }
+       });
+      
+      
+      
+      $(document).on('click', '.point-apply-btn', function(){
+                               
+        $('.request-error').hide();
+        
+      	var club_id = $('.point-apply-club').val();
+        var points = $('.point-applied').val();
+        var member = $('.member').val();
+        
+        console.log(club_id, points, member);
+        
+        $.ajax({
+          url: `${base_url}/cart/apply/points`,
+          data: { club_id : club_id, points : points, member : member },
+          type: 'POST',
+          success: function(res) {
+            var response = res;
+            
+            if(response.error){
+            	$('.request-error').show().slideDown().html(response.error);
+            }
+            else if(response.success){
+              	console.log(213);
+            	$('.apply-point-div').hide();
+                $('.apply-pin-div').show();
+                $('.request-success').html(response.success);
+                $('.member').val(response.member);
+                $('.point-applied').val(response.points);
+                $('.club_id').val(response.club_id);
+
+            }
+
+          }
+        });
+        
       });
-    });	
-  </script>
+      
+      
+      $(document).on('click', '.pin-apply-btn', function(){
+        $('.request-success').hide();
+        
+      	var club_id = $('.club_id').val();
+        var points = $('.point-applied').val();
+        var member = $('.member').val();
+        var pin = $('.pin').val();
+        
+        $.ajax({
+          url: `${base_url}/cart/apply/pin`,
+          data: { club_id : club_id, points : points, member : member, pin : pin },
+          type: 'POST',
+          success: function(res) {
+            var response = res;
+            
+            if(response.error){
+                $('.apply-pin-div').hide();
+                $('.apply-point-div').show();
+            	$('.request-error').show().slideDown().html(response.error);
+            }
+            else if(response.success){
+            	$('.apply-point-div').hide();
+                $('.apply-pin-div').show();
+                $('.request-success').html(response.success);
+                $('.request-success').show();
+                $('.member').val(response.member);
+                $('.point-applied').val(response.points);
+                $('.club_id').val(response.club_id);
+
+            }
+
+          }
+        });
+        
+      });
+    
+    
+      
+      
+      
+});	
+</script>

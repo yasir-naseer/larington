@@ -22,14 +22,14 @@
                <td>
                     
                </td>
-               <td style="text-align:right;" class="apply-point-div">
+               <td style="text-align:right; padding-right:0;" class="apply-point-div">
                    <form action="{{ route('cart.apply.points') }}" method="POST">
                         <select name="club_id" id="" class="point-apply-club">
                             @foreach($data as $item)
                                 <option value="{{ $item['club_id'] }}"> {{ $item['club_name'] }} </option>
                             @endforeach
                         </select>
-                        <input class="point-applied" type="number" placeholder="Enter number of points to spend">
+                        <input class="point-applied" type="number" min="2" placeholder="Enter number of points to spend">
                         <input class="member" type="text" placeholder="Enter your email/phone">
                         <button type="button" class="point-apply-btn" style="background: #d9534f;padding: 10px 15px;color: white;border: 0;">Pay with points</button>
                    </form>
@@ -39,7 +39,7 @@
                <td style="text-align:right; display:none;" class="apply-pin-div">
                    <form action="{{ route('cart.apply.pin') }}" method="POST">
                         <input type="hidden" class="club_id" val="">
-                        <input class="point-applied"  val="" readonly>
+                        <input class="point-applied"  val="" type="hidden">
                         <input class="member" type="hidden" val="">
                         <input class="pin" type="text" placeholder="Enter your PIN">
                         <button type="button" class="pin-apply-btn" style="background: #53a993;padding: 10px 15px;color: white;border: 0;">Apply PIN</button>

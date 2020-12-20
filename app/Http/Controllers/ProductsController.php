@@ -20,8 +20,14 @@ class ProductsController extends Controller
     public function index()
     {
         $shop = Auth::user();
-        $products = Product::where('store_id', $shop->id)->latest()->paginate(5);
-        return view('products.index')->with('products', $products);
+        $products = Product::where('store_id', $shop->id)->newQuery();
+
+        if($request->has('search')) {
+            $products->where('title', 'LIKE', '%' . $request->input('search') . '%');
+        }
+        $products = $products->latest()->paginate(20);
+
+        return view('products.index')->with('products', $products)->with('search', $reqeust->input('search'));
     }
 
     /**
@@ -224,6 +230,7 @@ class ProductsController extends Controller
         //
     }
 
+
     public function storeProducts($next = null)
     {
         $shop = Auth::user();
@@ -242,8 +249,8 @@ class ProductsController extends Controller
                 $this->storeProducts($products['link']['next']);
             }
         }
-        else {
-        }
+        
+        return redirect()->back()->with('success', 'Products Synced Successfully');
     }
 
     public function createProduct($product)
