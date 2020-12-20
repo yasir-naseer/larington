@@ -3,6 +3,7 @@
 use App\User;
 use stdClass;
 use App\Product;
+use App\ErrorLog;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -49,6 +50,7 @@ class ProductsCreateJob implements ShouldQueue
      */
     public function handle()
     {
+       try{
         $shop = User::where('name', $this->shopDomain->toNative())->first();
         if (Product::where('id', $this->data['id'])->exists()) {
             $p = Product::find($this->data['id']);
@@ -61,5 +63,12 @@ class ProductsCreateJob implements ShouldQueue
         $p->image = $this->data['image'];
         $p->store_id = $shop->id;
         $p->save(); 
+       }
+       catch(\Exception $e)
+       {
+            $log = new ErrorLog();
+            $log->message = $e->getMessage();
+            $log->save();
+       }
     }
 }

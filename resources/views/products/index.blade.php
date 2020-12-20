@@ -8,7 +8,7 @@
             <a href="{{ route('sync.products') }}" class="btn btn-primary">Sync Products</a>
         </div>
     </div>
-    @if(count($products) > 0)
+    
         <div class="block-content">
             <!-- Search Form -->
             <form action="" method="GET" >
@@ -27,7 +27,7 @@
                 </div>
             </form>
             <!-- END Search Form -->
-
+            @if(count($products) > 0)
             <!-- All Products Table -->
             <div class="table-responsive">
                 <table class="table table-borderless table-striped table-vcenter">
