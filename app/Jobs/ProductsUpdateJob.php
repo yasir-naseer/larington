@@ -50,6 +50,8 @@ class ProductsUpdateJob implements ShouldQueue
      */
     public function handle()
     {
+        $this->shopDomain = ShopDomain::fromNative($this->domain);
+
         $log = new ErrorLog();
         $log->message = 'HEHE';
         $log->save();
@@ -58,6 +60,7 @@ class ProductsUpdateJob implements ShouldQueue
             $log = new ErrorLog();
         $log->message = "before";
         $log->save();
+
             $shop = User::where('name', $this->shopDomain->toNative())->first();
             $log = new ErrorLog();
         $log->message = "shop";
