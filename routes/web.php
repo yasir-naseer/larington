@@ -14,5 +14,6 @@ Route::resource('rewards', 'RewardsController')->middleware(['auth.shopify']);
 Route::get('/products/get/clubs/{id}', 'ProductsController@getClubsForProduct');
 Route::post('/cart/get/clubs', 'ProductsController@getClubsForCart');
 Route::post('/cart/apply/points', 'ProductsController@cartApplyPoints')->name('cart.apply.points');
-Route::get('/cart/apply/pin', 'ProductsController@cartApplyPin')->name('cart.apply.pin');
+Route::post('/cart/apply/pin', 'ProductsController@cartApplyPin')->name('cart.apply.pin');
 Route::get('/submit/order', 'ProductsController@submitOrder')->name('submit.order');
+Route::get('/create/discount', 'ProductsController@createDiscount')->name('create.discount');

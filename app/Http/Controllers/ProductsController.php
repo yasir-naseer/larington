@@ -131,23 +131,14 @@ class ProductsController extends Controller
             'points' => $request->points,
             'consumerpin' => $request->pin
         ]);
-
-        // $response = Http::asForm()->post('https://larington.com/api/', [
-        //     'command' => 'acceptpoints',
-        //     'platform' => '',
-        //     'posted_sid' => 'kn0pj65lenn7m9ccospjfo8gg6',
-        //     'clubid' => '93',
-        //     'merchid' => '146',
-        //     'memberphoneoremail' => 'yasirnaseer.0@gmail.com',
-        //     'points' => '2',
-        //     'consumerpin' => '5886'
-        // ]);
-
         
         $result = json_decode($response->body(), 1);
 
         if($result['res'] == 1) {
-            return response()->json(['success' => $result['message']]);
+
+            $discount_amount = $result['resarray']['valueofpoints'];
+            $discount_code = $this->createDiscount($user,$discount_amount);
+            return response()->json(['success' => $result['message']. 'Your Discount Code is:'. $discount_code]);
         }
         else if($result['res'] == -1) {
             return response()->json(['error' => $result['message']]);
@@ -162,10 +153,41 @@ class ProductsController extends Controller
             'clubid' => '93',
             'merchid' => '146',
             'memberphoneoremail' => 'yasirnaseer.0@gmail.com',
-            'points' => '20',
+            'points' => '50',
         ]);
 
         dd($response->body());
+     }
+
+
+     public function createDiscount($user, $discount_amount)
+     {
+        
+        $data = [
+            "price_rule"=> [
+                "title"=> "larington_dis".rand(1,1000),
+                "target_type"=> "line_item",
+                "target_selection"=> "all",
+                "allocation_method"=> "across",
+                "value_type"=> "fixed_amount",
+                "value"=> '-'.$discount_amount,
+                "customer_selection"=> "all",
+                'starts_at'=> now()
+            ]
+        ];
+
+        $response = $user->api()->rest('POST', '/admin/price_rules.json', $data);
+        $price_rule = $response['body']['container']['price_rule'];
+
+        $data = [
+            "discount_code"=> [
+                "code"=> $price_rule['title']
+            ]
+        ];
+
+        $response = $user->api()->rest('POST', '/admin/price_rules/'.$price_rule['id'].'/discount_codes.json', $data);
+
+        return $price_rule['title'];
      }
 
     /**
