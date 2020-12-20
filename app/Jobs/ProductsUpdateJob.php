@@ -54,26 +54,16 @@ class ProductsUpdateJob implements ShouldQueue
 
     
         try{
-           
-            $log = new ErrorLog();
-            $log->message = $this->shopDomain . '23';
-            $log->save();
-
+    
             $shop = User::where('name', $this->shopDomain)->first();
           
-            $log = new ErrorLog();
-            $log->message = "aFTER";
-            $log->save();
             if (Product::where('id', $this->data->id)->exists()) {
                 $p = Product::find($this->data->id);
             } else {
                 $p = new Product();
             }
 
-   
-            $log = new ErrorLog();
-            $log->message = "very";
-            $log->save();
+
     
             $p->id = $this->data->id;
             $p->title = $this->data->title;
@@ -82,7 +72,7 @@ class ProductsUpdateJob implements ShouldQueue
             $p->save(); 
 
             $log = new ErrorLog();
-            $log->message = "last";
+            $log->message = 'sdf'.$this->data->id;
             $log->save();
 
             
