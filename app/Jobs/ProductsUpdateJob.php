@@ -53,43 +53,35 @@ class ProductsUpdateJob implements ShouldQueue
         // $this->shopDomain = ShopDomain::fromNative($this->domain);
 
         $log = new ErrorLog();
-        $log->message = 'HEHEHEHEHE';
+        $log->message = 'HOHOOHO';
         $log->save();
 
         try{
             $log = new ErrorLog();
-        $log->message = "beforeS". $this->shopDomain->toNative();
-        $log->save();
+            $log->message = "beforeS";
+            $log->save();
 
             $shop = User::where('name', $this->shopDomain->toNative())->first();
-            $log = new ErrorLog();
-        $log->message = "shop";
-        $log->save();
+          
             if (Product::where('id', $this->data->id)->exists()) {
                 $p = Product::find($this->data->id);
             } else {
                 $p = new Product();
             }
 
-            $log = new ErrorLog();
-        $log->message = '234';
-        $log->save();
+   
     
             $p->id = $this->data->id;
             $p->title = $this->data->title;
             $p->image = $this->data->image;
             $p->store_id = $shop->id;
             $p->save(); 
-
-            $log = new ErrorLog();
-        $log->message = '67657';
-        $log->save();
         }
         catch(\Exception $e)
         {
-        $log = new ErrorLog();
-        $log->message = $e->getMessage();
-        $log->save();
+            $log = new ErrorLog();
+            $log->message = "Crap";
+            $log->save();
         }
     }
 }
