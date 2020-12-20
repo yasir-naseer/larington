@@ -17,4 +17,4 @@ Route::post('/cart/apply/points', 'ProductsController@cartApplyPoints')->name('c
 Route::post('/cart/apply/pin', 'ProductsController@cartApplyPin')->name('cart.apply.pin');
 Route::get('/submit/order', 'ProductsController@submitOrder')->name('submit.order');
 Route::get('/create/discount', 'ProductsController@createDiscount')->name('create.discount');
-Route::get('/sync/products', 'ProductsController@syncProducts')->name('sync.products');
+Route::get('/sync/products', 'ProductsController@storeProducts')->name('sync.products');
