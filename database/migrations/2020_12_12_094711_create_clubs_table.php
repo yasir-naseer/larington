@@ -14,6 +14,7 @@ class CreateClubsTable extends Migration
     public function up()
     {
         Schema::create('clubs', function (Blueprint $table) {
+            $table->id();
             $table->bigInteger('club_id');
             $table->bigInteger('company_id')->nullable();
             $table->string('company_name')->nullable();

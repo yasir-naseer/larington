@@ -21,18 +21,3 @@ Route::get('/submit/order', 'ProductsController@submitOrder')->name('submit.orde
 Route::get('/create/discount', 'ProductsController@createDiscount')->name('create.discount');
 Route::get('/sync/products', 'ProductsController@storeProducts')->name('sync.products');
 
-Route::get('error', function(){
-    try{
-        $user = User::where('name', 'majid095.myshopify.com')->delete();
-        dd($user);
-        $user->name= 'adfds';
-        $user->save();
-
-    }
-    catch(\Exception $e)
-    {
-        $log = new ErrorLog();
-        $log->message = $e->getMessage();
-        $log->save();
-    }
-});

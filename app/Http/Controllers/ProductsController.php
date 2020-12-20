@@ -152,6 +152,12 @@ class ProductsController extends Controller
      }
 
      public function submitOrder(Request $request) {
+
+        // $shop = User::find(1);
+        // $products = $shop->api()->rest('GET', '/admin/orders.json');
+
+        // dd($products);
+
           $response = Http::asForm()->post('https://larington.com/api/', [
             'command' => 'issuepoints',
             'platform' => 'shopifyapp',
@@ -159,7 +165,6 @@ class ProductsController extends Controller
             'clubid' => '93',
             'merchid' => '146',
             'memberphoneoremail' => 'yasirnaseer.0@gmail.com',
-            'points' => '500',
         ]);
 
         dd($response->body());
