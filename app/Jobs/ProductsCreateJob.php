@@ -50,8 +50,7 @@ class ProductsCreateJob implements ShouldQueue
      */
     public function handle()
     {
-       try{
-        $shop = User::where('name', $this->shopDomain->toNative())->first();
+        $shop = User::where('name', $this->shopDomain)->first();
         
         if (Product::where('id', $this->data->id)->exists()) {
             $p = Product::find($this->data->id);
@@ -61,15 +60,9 @@ class ProductsCreateJob implements ShouldQueue
 
         $p->id = $this->data->id;
         $p->title = $this->data->title;
-        $p->image = $this->data->image;
+        $p->image = json_encode($this->data->image);
         $p->store_id = $shop->id;
         $p->save(); 
-       }
-       catch(\Exception $e)
-       {
-        $log = new ErrorLog();
-        $log->message = 'hello';
-        $log->save();
-       }
+       
     }
 }

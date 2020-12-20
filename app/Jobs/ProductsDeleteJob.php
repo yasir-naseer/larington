@@ -36,7 +36,7 @@ class ProductsDeleteJob implements ShouldQueue
      */
     public function __construct($shopDomain, $data)
     {
-        $shop = User::where('name', $this->shopDomain->toNative())->first();
+        $shop = User::where('name', $this->shopDomain)->first();
         if (Product::where('id', $this->data->id)->exists()) {
             $p = Product::find($this->data->id);
             $p->delete();

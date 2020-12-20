@@ -51,19 +51,19 @@ class ProductsUpdateJob implements ShouldQueue
     public function handle()
     {
         
-            $shop = User::where('name', $this->shopDomain)->first();
-          
-            if (Product::where('id', $this->data->id)->exists()) {
-                $p = Product::find($this->data->id);
-            } else {
-                $p = new Product();
-            }
+        $shop = User::where('name', $this->shopDomain)->first();
+        
+        if (Product::where('id', $this->data->id)->exists()) {
+            $p = Product::find($this->data->id);
+        } else {
+            $p = new Product();
+        }
             
         $p->id = $this->data->id;
-            $p->title = $this->data->title;
-            $p->image = json_encode($this->data->image);
-            $p->store_id = $shop->id;
-            $p->save(); 
+        $p->title = $this->data->title;
+        $p->image = json_encode($this->data->image);
+        $p->store_id = $shop->id;
+        $p->save(); 
                 
         
     }
