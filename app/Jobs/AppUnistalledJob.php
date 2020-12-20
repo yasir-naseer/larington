@@ -4,6 +4,7 @@ use App\Club;
 use App\User;
 use stdClass;
 use App\Product;
+use App\ErrorLog;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
