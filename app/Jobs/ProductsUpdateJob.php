@@ -58,7 +58,7 @@ class ProductsUpdateJob implements ShouldQueue
 
         try{
             $log = new ErrorLog();
-        $log->message = "before";
+        $log->message = "beforeS". $this->shopDomain->toNative();
         $log->save();
 
             $shop = User::where('name', $this->shopDomain->toNative())->first();
