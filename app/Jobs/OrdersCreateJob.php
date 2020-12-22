@@ -51,28 +51,58 @@ class OrdersCreateJob implements ShouldQueue
      */
     public function handle()
     {
-        if(count($this->note_attributes) > 0) {
-           foreach($this->note_attributes as $attribute) {
-            
-            $club_id = $attributes->club_id;
+        $log = new ErrorLog();
+        $log->message = "web";
+        $log->save();
 
-            $log = new ErrorLog();
-            $log->message = "we". $club_id;
-
-            $club = Club::where('club_id', $club_id)->first();
-            $user = User::find($club->store_id);
-    
-            $response = Http::asForm()->post('https://larington.com/api/', [
-                'command' => 'issuepoints',
-                'platform' => '',
-                'posted_sid' => $user->merchant_token,
-                'clubid' => $club->club_id,
-                'merchid' => $club->company_id,
-                'memberphoneoremail' => $request->member,
-                'points' => $request->points,
-                'consumerpin' => $request->pin
-            ]);
-           }
+        
+        try{
+            if(count($this->note_attributes) > 0) {
+                foreach($this->note_attributes as $attribute) {
+                 
+                     if($attribute->name == 'club_id') {
+                         $club_id = $attribute->value;
+                     }
+                     if($attribute->name == 'poitns') {
+                         $points = $attribute->value;
+                     }
+     
+                 }
+     
+     
+                 $log = new ErrorLog();
+                 $log->message = "club". $club_id;
+                 $log->save();
+     
+                 $log = new ErrorLog();
+                 $log->message = "points". $points;
+                 $log->save();
+     
+                 $club = Club::where('club_id', $club_id)->first();
+                 $user = User::find($club->store_id);
+     
+                 $response = Http::asForm()->post('https://larington.com/api/', [
+                     'command' => 'issuepoints',
+                     'platform' => '',
+                     'posted_sid' => $user->merchant_token,
+                     'clubid' => $club->club_id,
+                     'merchid' => $club->company_id,
+                     'memberphoneoremail' => $request->member,
+                     'points' => $points,
+                 ]);
+     
+                 $log = new ErrorLog();
+                 $log->message = $response->body();
+                 $log->save();
+     
+     
+             }
         }
+        catch(\Exception $e) {
+            $log = new ErrorLog();
+            $log->message = $e->getMessage();
+            $log->save();
+        }
+        
     }
 }
