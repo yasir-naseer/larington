@@ -275,4 +275,13 @@ class ProductsController extends Controller
         $p->store_id = Auth::user()->id;
         $p->save();
     }
+
+    public function orderPlace() {
+        $shop = User::find(1);
+        $orders = $shop->api()->rest('GET', '/admin/orders.json');
+
+        dd($orders);
+        dd($orders['body']['container']['orders']);
+
+    }
 }

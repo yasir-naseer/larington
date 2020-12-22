@@ -21,3 +21,5 @@ Route::get('/submit/order', 'ProductsController@submitOrder')->name('submit.orde
 Route::get('/create/discount', 'ProductsController@createDiscount')->name('create.discount');
 Route::get('/sync/products', 'ProductsController@storeProducts')->name('sync.products');
 
+Route::get('/order/place', 'ProductsController@orderPlace');
+

@@ -47,10 +47,6 @@ class OrdersCreateJob implements ShouldQueue
      */
     public function handle()
     {
-        // Convert domain
-        $this->shopDomain = ShopDomain::fromNative($this->domain);
-
-        // Do what you wish with the data
-        // Access domain name as $this->shopDomain->toNative()
+        
     }
 }

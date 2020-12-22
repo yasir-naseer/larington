@@ -318,6 +318,10 @@ return [
         [
             'topic' => 'app/uninstalled',
             'address' => 'https://phpstack-490736-1648925.cloudwaysapps.com/webhook/app-unistalled'
+        ],
+        [
+            'topic' => 'orders/create',
+            'address' => 'https://phpstack-490736-1648925.cloudwaysapps.com/webhook/orders-create'
         ]
     ],
 
