@@ -55,11 +55,8 @@ class OrdersCreateJob implements ShouldQueue
         $log->message = "web";
         $log->save();
 
-    
-
-
         try{
-            $order = json_decode($this->data->note_attributes, 1);
+            //$order = json_decode($this->data->note_attributes);
 
             
                 $log = new ErrorLog();
@@ -67,13 +64,17 @@ class OrdersCreateJob implements ShouldQueue
                 $log->save();
 
 
-                foreach($orders as $attribute) {
-                 
-                     if($attribute['name'] == 'club_id') {
-                         $club_id = $attribute['value'];
+                foreach($this->data->note_attributes as $attribute) {
+
+                    $log = new ErrorLog();
+                    $log->message = "sfds";
+                    $log->save();
+
+                     if($attribute->name == 'club_id') {
+                         $club_id = $attribute->value;
                      }
-                     if($attribute['name'] == 'poitns') {
-                         $points = $attribute['value'];
+                     if($attribute->name == 'points') {
+                         $points = $attribute->value;
                      }
      
                  }
