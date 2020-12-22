@@ -16,7 +16,7 @@ class VerifyCsrfToken extends Middleware
         '/cart/apply/points',
         '/cart/apply/pin',
         '/merchants',
-        '/products'
+        '/rewards'
         
     ];
 }
