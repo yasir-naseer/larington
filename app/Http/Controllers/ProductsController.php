@@ -144,7 +144,10 @@ class ProductsController extends Controller
 
             $discount_amount = $result['resarray']['valueofpoints'];
             $discount_code = $this->createDiscount($user,$discount_amount);
-            return response()->json(['success' => $result['message']. 'Your Discount Code is:'. $discount_code]);
+            return response()->json([
+                'success' => $result['message']. 'Your Discount Code is:'. $discount_code,
+                'club_id' => $club->club_id,
+            ]);
         }
         else if($result['res'] == -1) {
             return response()->json(['error' => $result['message']]);
