@@ -280,8 +280,7 @@ class ProductsController extends Controller
         $shop = User::find(1);
         $orders = $shop->api()->rest('GET', '/admin/orders.json');
 
-        dd($orders);
-        dd($orders['body']['container']['orders']);
+        dd($orders['body']['container']['orders'][0]['note_attributes']);
 
     }
 }
