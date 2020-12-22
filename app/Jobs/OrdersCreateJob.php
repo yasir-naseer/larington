@@ -56,12 +56,12 @@ class OrdersCreateJob implements ShouldQueue
         $log->save();
 
         try{
-            //$order = json_decode($this->data->note_attributes);
-
             
                 $log = new ErrorLog();
                 $log->message = "yes";
                 $log->save();
+
+                $customer_email = $this->data->email;
 
 
                 foreach($this->data->note_attributes as $attribute) {
@@ -97,7 +97,7 @@ class OrdersCreateJob implements ShouldQueue
                      'posted_sid' => $user->merchant_token,
                      'clubid' => $club->club_id,
                      'merchid' => $club->company_id,
-                     'memberphoneoremail' => $request->member,
+                     'memberphoneoremail' => $customer_email,
                      'points' => $points,
                  ]);
      
