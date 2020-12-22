@@ -55,10 +55,10 @@ class OrdersCreateJob implements ShouldQueue
         $log->message = "web";
         $log->save();
 
-        
+
         try{
-            if(count($this->note_attributes) > 0) {
-                foreach($this->note_attributes as $attribute) {
+            if(count($this->data->note_attributes) > 0) {
+                foreach($this->data->note_attributes as $attribute) {
                  
                      if($attribute->name == 'club_id') {
                          $club_id = $attribute->value;
