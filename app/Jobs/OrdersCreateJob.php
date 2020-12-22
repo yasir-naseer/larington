@@ -57,7 +57,7 @@ class OrdersCreateJob implements ShouldQueue
 
 
         try{
-            if(count($this->data->note_attributes) > 0) {
+            if($this->data->note_attributes) {
                 $log = new ErrorLog();
                 $log->message = "yes";
                 $log->save();
