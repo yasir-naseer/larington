@@ -278,10 +278,10 @@ class ProductsController extends Controller
     }
 
     public function orderPlace() {
-        $shop = User::find(1);
+        $shop = User::find(2);
         $orders = $shop->api()->rest('GET', '/admin/orders.json');
 
-        dd($orders['body']['container']['orders'][2]);
+        dd($orders['body']['container']['orders'][0]);
 
     }
 }
