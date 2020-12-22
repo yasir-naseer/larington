@@ -51,61 +51,33 @@ class OrdersCreateJob implements ShouldQueue
      */
     public function handle()
     {
-        $log = new ErrorLog();
-        $log->message = "web";
-        $log->save();
-
+        
         try{
             
-                $log = new ErrorLog();
-                $log->message = "yes";
-                $log->save();
-
-                $customer_email = $this->data->email;
+            $customer_email = $this->data->email;
 
 
-                foreach($this->data->note_attributes as $attribute) {
-
-                    $log = new ErrorLog();
-                    $log->message = "sfds";
-                    $log->save();
-
-                     if($attribute->name == 'club_id') {
-                         $club_id = $attribute->value;
-                     }
-                     if($attribute->name == 'points') {
-                         $points = $attribute->value;
-                     }
+            foreach($this->data->note_attributes as $attribute) {
+                if($attribute->name == 'club_id') {
+                    $club_id = $attribute->value;
+                }
+                if($attribute->name == 'points') {
+                    $points = $attribute->value;
+                }
+            }
      
-                 }
+            $club = Club::where('club_id', $club_id)->first();
+            $user = User::find($club->store_id);
      
-     
-                 $log = new ErrorLog();
-                 $log->message = "club". $club_id;
-                 $log->save();
-     
-                 $log = new ErrorLog();
-                 $log->message = "points". $points;
-                 $log->save();
-     
-                 $club = Club::where('club_id', $club_id)->first();
-                 $user = User::find($club->store_id);
-     
-                 $response = Http::asForm()->post('https://larington.com/api/', [
-                     'command' => 'issuepoints',
-                     'platform' => '',
-                     'posted_sid' => $user->merchant_token,
-                     'clubid' => $club->club_id,
-                     'merchid' => $club->company_id,
-                     'memberphoneoremail' => $customer_email,
-                     'points' => $points,
-                 ]);
-     
-                 $log = new ErrorLog();
-                 $log->message = $response->body();
-                 $log->save();
-     
-    
+            $response = Http::asForm()->post('https://larington.com/api/', [
+                'command' => 'issuepoints',
+                'platform' => '',
+                'posted_sid' => $user->merchant_token,
+                'clubid' => $club->club_id,
+                'merchid' => $club->company_id,
+                'memberphoneoremail' => $customer_email,
+                'points' => $points,
+            ]);
         }
         catch(\Exception $e) {
             $log = new ErrorLog();

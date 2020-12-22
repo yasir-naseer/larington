@@ -106,6 +106,13 @@
                 $('.point-applied').val(response.points);
                 $('.club_id').val(response.club_id);
 
+                jQuery.post('/cart/update.js', {
+                  attributes: {
+                    'club_id': response.club_id,
+                    'points' : response.points
+                  }
+                });
+
             }
 
           }
