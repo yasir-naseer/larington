@@ -58,6 +58,11 @@ class OrdersCreateJob implements ShouldQueue
 
         try{
             if(count($this->data->note_attributes) > 0) {
+                $log = new ErrorLog();
+                $log->message = "yes";
+                $log->save();
+
+
                 foreach($this->data->note_attributes as $attribute) {
                  
                      if($attribute->name == 'club_id') {
@@ -96,6 +101,12 @@ class OrdersCreateJob implements ShouldQueue
                  $log->save();
      
      
+             }
+             else {
+                $log = new ErrorLog();
+                $log->message = "no";
+                $log->save();
+        
              }
         }
         catch(\Exception $e) {
