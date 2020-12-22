@@ -147,6 +147,7 @@ class ProductsController extends Controller
             return response()->json([
                 'success' => $result['message']. 'Your Discount Code is:'. $discount_code,
                 'club_id' => $club->club_id,
+                'points' => $request->points
             ]);
         }
         else if($result['res'] == -1) {

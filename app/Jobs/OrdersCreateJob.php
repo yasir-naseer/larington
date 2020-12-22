@@ -1,12 +1,16 @@
 <?php namespace App\Jobs;
 
+use App\Club;
+use App\User;
+use stdClass;
+use App\ErrorLog;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Osiset\ShopifyApp\Contracts\Objects\Values\ShopDomain;
-use stdClass;
 
 class OrdersCreateJob implements ShouldQueue
 {
@@ -47,6 +51,28 @@ class OrdersCreateJob implements ShouldQueue
      */
     public function handle()
     {
-        
+        if(count($this->note_attributes) > 0) {
+           foreach($this->note_attributes as $attribute) {
+            
+            $club_id = $attributes->club_id;
+
+            $log = new ErrorLog();
+            $log->message = "we". $club_id;
+
+            $club = Club::where('club_id', $club_id)->first();
+            $user = User::find($club->store_id);
+    
+            $response = Http::asForm()->post('https://larington.com/api/', [
+                'command' => 'issuepoints',
+                'platform' => '',
+                'posted_sid' => $user->merchant_token,
+                'clubid' => $club->club_id,
+                'merchid' => $club->company_id,
+                'memberphoneoremail' => $request->member,
+                'points' => $request->points,
+                'consumerpin' => $request->pin
+            ]);
+           }
+        }
     }
 }
