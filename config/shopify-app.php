@@ -323,18 +323,19 @@ return [
             'topic' => 'orders/create',
             'address' => 'https://phpstack-490736-1648925.cloudwaysapps.com/webhook/orders-create'
         ],
-        [
-            'topic' => 'shop/redact',
-            'address' => 'https://phpstack-490736-1648925.cloudwaysapps.com/webhook/shop-redact'
-        ],
-        [
-            'topic' => 'customers/redact',
-            'address' => 'https://phpstack-490736-1648925.cloudwaysapps.com/webhook/customers-redact'
-        ],
-        [
-            'topic' => 'customers/data_request',
-            'address' => 'https://phpstack-490736-1648925.cloudwaysapps.com/webhook/customers-data-request'
-        ]
+
+        // [
+        //     'topic' => 'shop/redact',
+        //     'address' => 'https://phpstack-490736-1648925.cloudwaysapps.com/webhook/shop-redact'
+        // ],
+        // [
+        //     'topic' => 'customers/redact',
+        //     'address' => 'https://phpstack-490736-1648925.cloudwaysapps.com/webhook/customers-redact'
+        // ],
+        // [
+        //     'topic' => 'customers/data_request',
+        //     'address' => 'https://phpstack-490736-1648925.cloudwaysapps.com/webhook/customers-data-request'
+        // ]
     ],
 
     /*
