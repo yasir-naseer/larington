@@ -16,7 +16,7 @@ Route::resource('products', 'ProductsController');
 Route::resource('rewards', 'RewardsController');
 Route::get('/products/get/clubs/{id}', 'ProductsController@getClubsForProduct');
 Route::post('/store/reward/points', 'MerchantController@storeRewardPoints');
-Route::post('/cart/get/clubs', 'ProductsController@getClubsForCart');
+Route::get('/cart/get/clubs', 'ProductsController@getClubsForCart');
 Route::post('/cart/apply/points', 'ProductsController@cartApplyPoints')->name('cart.apply.points');
 Route::post('/cart/apply/pin', 'ProductsController@cartApplyPin')->name('cart.apply.pin');
 Route::get('/submit/order', 'ProductsController@submitOrder')->name('submit.order');
