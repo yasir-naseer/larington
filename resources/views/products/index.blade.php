@@ -109,7 +109,7 @@
             console.log(0);
             var club_id = $(this).data('club');
             var product_id = $(this).data('product');
-            var points = $(`.points_${club_id}_${product_id}`);
+            var points = $(`.points_${club_id}_${product_id}`).val();
 
             console.log(club_id, product_id, points);
            
