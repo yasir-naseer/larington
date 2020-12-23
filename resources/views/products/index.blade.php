@@ -103,6 +103,7 @@
 @endsection
 
 @section('js_after')
+   <script>
     $(document).ready(function() {
         $('.add-btn').click(function(){
             console.log(0);
@@ -117,4 +118,5 @@
             }); -->
         }); 
     });
+   </script>
 @endsection
