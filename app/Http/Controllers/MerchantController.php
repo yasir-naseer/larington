@@ -74,14 +74,16 @@ class MerchantController extends Controller
                 return redirect()->back()->with('error', "No companies or clubs available. Please complete your profile on larington.com");
             }
             else {
+
+                if(Club::where('store_id', Auth::user()->id)->exists())
+                {
+                    Club::where('store_id', Auth::user()->id)->delete();
+                }
+
                 foreach($company['companies'] as $company) {
                     foreach($company['clubs'] as $c) {
-                        if(Club::where('club_id', $c['clubid'])->exists()) {
-                            $club = Club::where('club_id', $c['clubid'])->first();
-                        }
-                        else {
-                            $club = new Club();
-                        }
+                    
+                        $club = new Club();
                         $club->club_id = $c['clubid'];
                         $club->company_id = $company['companyid'];
                         $club->company_name = $company['dtitlos'];
