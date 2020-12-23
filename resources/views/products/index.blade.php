@@ -112,7 +112,7 @@
             var reward_points = $(`.points_${club_id}_${product_id}`).val();
 
             $.ajax({
-                url: `/admin/store/order/notes/${id}`,
+                url: `/rewards`,
                 data: { club_id : club_id, product_id : product_id, reward_points : reward_points},
                 type: 'POST',
                 success: function(res) {
