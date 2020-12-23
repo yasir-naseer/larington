@@ -36,7 +36,7 @@ class RewardsController extends Controller
     public function store(Request $request)
     {
         if(Reward::where('product_id', $request->product_id)->where('club_id', $request->club_id)->exists()) {
-            $reward = Reward::where('product_id', $request->product_id)->first();
+            $reward = Reward::where('product_id', $request->product_id)->where('club_id', $request->club_id)->first();
         }
         else {
             $reward = new Reward();
