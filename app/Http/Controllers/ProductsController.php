@@ -149,9 +149,10 @@ class ProductsController extends Controller
             $discount_amount = $result['resarray']['valueofpoints'];
             $discount_code = $this->createDiscount($user,$discount_amount);
             return response()->json([
-                'success' => $result['message']. 'Your Discount Code is:'. $discount_code,
+                'success' => $result['message'],
                 'club_id' => $club->club_id,
-                'points' => $request->points
+                'points' => $request->points,
+                'discount_code' => $discount_code
             ]);
         }
         else if($result['res'] == -1) {
@@ -173,6 +174,7 @@ class ProductsController extends Controller
             'clubid' => '93',
             'merchid' => '146',
             'memberphoneoremail' => 'yasirnaseer.0@gmail.com',
+            'points' => '1000'
         ]);
 
         dd($response->body());
