@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Club;
+use App\Reward;
 use App\Product;
 use App\Merchant;
 use Illuminate\Http\Request;
@@ -66,6 +67,8 @@ class MerchantController extends Controller
             ]);
 
             $company = json_decode($response->body(), 1);
+
+            dd($company);
 
             if(array_key_exists('message', $company)) {
                 return redirect()->back()->with('error', "No companies or clubs available. Please complete your profile on larington.com");
@@ -143,9 +146,5 @@ class MerchantController extends Controller
     public function destroy(Merchant $merchant)
     {
         //
-    }
-
-    public function storeRewardPoints(Request $request) {
-        
     }
 }

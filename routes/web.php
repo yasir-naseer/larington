@@ -12,7 +12,7 @@ Route::get('/', function () {
 })->middleware(['auth.shopify'])->name('home');
 
 Route::resource('merchants', 'MerchantController')->middleware(['auth.shopify']);
-Route::resource('products', 'ProductsController')->middleware(['auth.shopify']);
+Route::resource('products', 'ProductsController');
 Route::resource('rewards', 'RewardsController');
 Route::get('/products/get/clubs/{id}', 'ProductsController@getClubsForProduct');
 Route::post('/store/reward/points', 'MerchantController@storeRewardPoints');
