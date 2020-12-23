@@ -47,7 +47,7 @@ class RewardsController extends Controller
         $reward->reward_points = $request->reward_points;
         $reward->save();
 
-        return redirect()->back()->with('success', 'Reward Points Added Successfully!');
+        return response()->json(['data' => 'success']);
     }
 
     /**

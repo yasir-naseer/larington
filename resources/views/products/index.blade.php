@@ -106,12 +106,23 @@
    <script>
     $(document).ready(function() {
         $('.add-btn').click(function(){
-            console.log(0);
+            
             var club_id = $(this).data('club');
             var product_id = $(this).data('product');
-            var points = $(`.points_${club_id}_${product_id}`).val();
+            var reward_points = $(`.points_${club_id}_${product_id}`).val();
 
-            console.log(club_id, product_id, points);
+            $.ajax({
+                url: `/admin/store/order/notes/${id}`,
+                data: { club_id : club_id, product_id : product_id, reward_points : reward_points},
+                type: 'POST',
+                success: function(res) {
+                    var response = res.data;
+                    console.log(response);
+                    if(response == 'success') {
+                        toastr.success("Reward Points added Successfully!");
+                    }
+                }
+            });
            
         }); 
     });
