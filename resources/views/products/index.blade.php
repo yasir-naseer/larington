@@ -64,8 +64,8 @@
                                                     <td>
                                                         <form class="form-inline" action="{{ route('rewards.store') }}" method="POST">
                                                             @csrf
-                                                            <input type="hidden" name="club_id" value="{{ $club->club_id }}">
-                                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                            <input type="hidden" name="club_id" value="{{ $club->club_id }}" >
+                                                            <input type="hidden" name="product_id" value="{{ $product->id }}" class>
                                                             @php
                                                                 $reward = App\Reward::where('product_id', $product->id)->where('club_id', $club->club_id)->first();
                                                                 $points = 0;
@@ -73,8 +73,8 @@
                                                                     $points = $reward->reward_points;
                                                                 }
                                                             @endphp
-                                                            <input type="text" class="form-control" name="reward_points" value="{{ $points }}">
-                                                            <button class="btn btn-sm btn-alt-primary" style="padding: 7px; " type="submit" data-toggle="tooltip" title="Save">
+                                                            <input type="text" class="form-control points_{{ $club->club_id }}_{{ $product->id }}" name="reward_points" value="{{ $points }}">
+                                                            <button class="btn btn-sm btn-alt-primary add-btn" style="padding: 7px; " type="button" data-club="{{ $club->club_id  }}" data-product="{{ $product->id }}" data-toggle="tooltip" title="Save">
                                                                 <i class="fa fa-fw fa-plus text-dark"></i>
                                                             </button>
                                                         </form>
@@ -100,4 +100,21 @@
     @endif
 </div>
 
+@endsection
+
+@section('js_after')
+    $(document).ready(function() {
+        $('.add-btn').click(function(){
+            console.log(0);
+            var club_id = $(this).data('club');
+            var product_id = $(this).data('product');
+            var points = $(`.points_${club_id}_${product_id}`);
+
+            console.log(club_id, product_id, points);
+            <!-- $.ajax({
+                method : 'POST',
+                data : 
+            }); -->
+        }); 
+    });
 @endsection
