@@ -68,7 +68,6 @@ class MerchantController extends Controller
 
             $company = json_decode($response->body(), 1);
 
-            dd($company);
 
             if(array_key_exists('message', $company)) {
                 return redirect()->back()->with('error', "No companies or clubs available. Please complete your profile on larington.com");
