@@ -144,4 +144,8 @@ class MerchantController extends Controller
     {
         //
     }
+
+    public function storeRewardPoints(Request $request) {
+        
+    }
 }
