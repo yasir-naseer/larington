@@ -76,11 +76,15 @@ class ProductsController extends Controller
         $data = [];
         if(count($clubs) > 0) {
             foreach($clubs as $club) {
-                array_push($data, [
-                    'club_name' => Club::where('club_id',$club)->first()->club_name,
-                    'club_id' => Club::where('club_id',$club)->first()->club_id,
-                    'points' => Reward::where('club_id', $club)->whereIn('product_id', $products_ids)->sum('reward_points')
-                ]);
+                $c = Club::where('club_id',$club)->first();
+                if($c){
+                    array_push($data, [
+                        'club_name' => $c->club_name,
+                        'club_id' => $c->club_id,
+                        'points' => Reward::where('club_id', $club)->whereIn('product_id', $products_ids)->sum('reward_points')
+                    ]);
+                }
+               
             }
         }
                       
