@@ -112,10 +112,7 @@
             var points = $(`.points_${club_id}_${product_id}`);
 
             console.log(club_id, product_id, points);
-            <!-- $.ajax({
-                method : 'POST',
-                data : 
-            }); -->
+           
         }); 
     });
    </script>
