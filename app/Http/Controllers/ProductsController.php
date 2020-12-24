@@ -23,9 +23,10 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
         
-
+       
         $shop = Auth::user()->id;
         
+       
         $products = Product::where('store_id', $shop)->newQuery();
 
         if($request->has('search')) {
