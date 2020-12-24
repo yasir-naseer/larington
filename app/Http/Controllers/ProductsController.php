@@ -22,15 +22,10 @@ class ProductsController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->auth)
-        {
-            $shop = json_decode($request->auth, 1);
-            
-            $shop = $shop['id'];
-        }
-        else {
-            $shop = Auth::user()->id;
-        }
+        
+       
+        $shop = Auth::user()->id;
+        
        
         $products = Product::where('store_id', $shop)->newQuery();
 
@@ -40,6 +35,24 @@ class ProductsController extends Controller
         $products = $products->latest()->paginate(20);
 
         return view('products.index')->with('products', $products)->with('search', $request->input('search'));
+    }
+
+    public function search(Reqeust $request) {
+        if($request->auth)
+        {
+            $shop = json_decode($request->auth, 1);
+            
+            $shop = $shop['id'];
+
+            $products = Product::where('store_id', $shop)->newQuery();
+
+            if($request->has('search')) {
+                $products->where('title', 'LIKE', '%' . $request->input('search') . '%');
+            }
+            $products = $products->latest()->paginate(20);
+    
+            return view('products.index')->with('products', $products)->with('search', $request->input('search'));
+        }
     }
 
     /**

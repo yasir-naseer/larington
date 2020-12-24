@@ -22,6 +22,7 @@ Route::post('/cart/apply/pin', 'ProductsController@cartApplyPin')->name('cart.ap
 Route::get('/submit/order', 'ProductsController@submitOrder')->name('submit.order');
 Route::get('/create/discount', 'ProductsController@createDiscount')->name('create.discount');
 Route::get('/sync/products', 'ProductsController@storeProducts')->name('sync.products');
+Route::get('/search', 'MerchantController@search');
 
 Route::get('/order/place', 'ProductsController@orderPlace');
 
