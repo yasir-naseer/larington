@@ -25,6 +25,8 @@ class ProductsController extends Controller
         if($request->auth)
         {
             $shop = json_decode($request->auth, 1);
+            dump($shop);
+            dd($shop->id);
         }
         else {
             $shop = Auth::user();
