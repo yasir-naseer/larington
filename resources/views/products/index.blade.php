@@ -11,11 +11,10 @@
     
         <div class="block-content">
             <!-- Search Form -->
-            <form action="/search" method="GET" >
+            <form action="" method="GET" >
                 <div class="form-group">
                     <div class="input-group">
                         <input type="text" class="form-control form-control-alt" id="" name="search" value="{{ $search}}" placeholder="Search all products..">
-                        <input type="hidden" name="auth" value="{{ Auth::user()->id }}">
                         <div class="input-group-append">
                             <button class="input-group-text bg-body border-0">
                                 <i class="fa fa-search"></i>

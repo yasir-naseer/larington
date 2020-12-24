@@ -23,10 +23,8 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
         
-       
         $shop = Auth::user()->id;
         
-       
         $products = Product::where('store_id', $shop)->newQuery();
 
         if($request->has('search')) {
@@ -34,24 +32,9 @@ class ProductsController extends Controller
         }
         $products = $products->latest()->paginate(20);
 
-        return view('products.index')->with('products', $products)->with('search', $request->input('search'));
+        return redirect()->back()->with('products', $products)->with('search', $request->input('search'));
     }
 
-    public function search(Request $request) {
-        if($request->auth)
-        {
-            $shop = json_decode($request->auth, 1);
-           
-            $products = Product::where('store_id', $shop)->newQuery();
-
-            if($request->has('search')) {
-                $products->where('title', 'LIKE', '%' . $request->input('search') . '%');
-            }
-            $products = $products->latest()->paginate(20);
-    
-            return view('products.index')->with('products', $products)->with('search', $request->input('search'));
-        }
-    }
 
     /**
      * Show the form for creating a new resource.
