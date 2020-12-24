@@ -41,7 +41,7 @@ class ProductsController extends Controller
         if($request->auth)
         {
             $shop = json_decode($request->auth, 1);
-            
+            dd($shop);
             $shop = $shop['id'];
 
             $products = Product::where('store_id', $shop)->newQuery();
