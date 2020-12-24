@@ -97,10 +97,9 @@ class MerchantController extends Controller
             $products = Product::where('store_id', Auth::user()->id)->paginate(10);
             $clubs = Club::where('store_id', Auth::user()->id)->get();
 
-            return view('products.index')
+            return redirect(route('products.index'))
             ->with('products', $products)
             ->with('clubs', $clubs)
-            ->with('search', $request->input('search'))
             ->with('success', 'Login Successful');
         }
     }

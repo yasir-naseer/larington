@@ -30,7 +30,7 @@
             @if(count($products) > 0)
             <!-- All Products Table -->
             <div class="table-responsive">
-                <table class="table table-borderless table-striped table-vcenter">
+                <table class="table table-borderless js-dataTable-full table-striped table-vcenter">
                     <thead>
                         <tr>
                             <th class="text-left" style="width: 100px;">Product</th>
