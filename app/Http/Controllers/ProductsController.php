@@ -25,6 +25,7 @@ class ProductsController extends Controller
         if($request->auth)
         {
             $shop = $request->auth;
+            dd($shop);
         }
         else {
             $shop = Auth::user();
