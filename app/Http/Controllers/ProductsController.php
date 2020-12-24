@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\Http;
 
 class ProductsController extends Controller
 {
-    public function __construct() {
-        $this->middleware('auth.shopify')->only('index');
-    }
+    
     /**
      * Display a listing of the resource.
      *
