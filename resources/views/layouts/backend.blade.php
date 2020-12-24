@@ -23,6 +23,9 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
         <link rel="stylesheet" id="css-main" href="{{ asset('/css/oneui.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/toastr.min.css') }}">
+         <!-- Page JS Plugins CSS -->
+    <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css') }}">
 
         <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
         @yield('css_after')
@@ -306,6 +309,17 @@
 
         <!-- OneUI Core JS -->
         <script src="{{ asset('js/oneui.app.js') }}"></script>
+        <!-- Page JS Plugins -->
+    <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/buttons/buttons.colVis.min.js') }}"></script>
+
+    <!-- Page JS Code -->
+    <script src="{{ asset('js/pages/tables_datatables.js') }}"></script>
 
         <!-- Laravel Scaffolding JS -->
 
