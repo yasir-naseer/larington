@@ -25,14 +25,14 @@ class ProductsController extends Controller
         if($request->auth)
         {
             $shop = json_decode($request->auth, 1);
-            dump($shop);
-            dd($shop->id);
+            
+            $shop = $shop['id'];
         }
         else {
-            $shop = Auth::user();
+            $shop = Auth::user()->id;
         }
        
-        $products = Product::where('store_id', $shop->id)->newQuery();
+        $products = Product::where('store_id', $shop)->newQuery();
 
         if($request->has('search')) {
             $products->where('title', 'LIKE', '%' . $request->input('search') . '%');
