@@ -100,6 +100,7 @@ class MerchantController extends Controller
             return view('products.index')
             ->with('products', $products)
             ->with('clubs', $clubs)
+            ->with('search', $request->input('search'))
             ->with('success', 'Login Successful');
         }
     }
