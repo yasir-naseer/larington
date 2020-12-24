@@ -37,7 +37,7 @@ class ProductsController extends Controller
         return view('products.index')->with('products', $products)->with('search', $request->input('search'));
     }
 
-    public function search(Reqeust $request) {
+    public function search(Request $request) {
         if($request->auth)
         {
             $shop = json_decode($request->auth, 1);
