@@ -22,7 +22,7 @@ class ProductsController extends Controller
      */
     public function index(Request $request)
     {
-        $shop = Auth::user();
+        $shop = $request->auth;
         $products = Product::where('store_id', $shop->id)->newQuery();
 
         if($request->has('search')) {
