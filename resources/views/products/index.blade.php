@@ -4,29 +4,12 @@
 <div class="block">
     <div class="block-header block-header-default d-flex justify-content-between">
         <h3 class="block-title">All Products</h3>
-        <div>
+        <!-- <div>
             <a href="{{ route('sync.products') }}" class="btn btn-primary">Sync Products</a>
-        </div>
+        </div> -->
     </div>
     
         <div class="block-content">
-            <!-- Search Form -->
-            <form action="" method="GET" >
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="text" class="form-control form-control-alt" id="" name="search" value="{{ $search}}" placeholder="Search all products..">
-                        <div class="input-group-append">
-                            <button class="input-group-text bg-body border-0">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            <a href="{{ route('products.index') }}" class="input-group-text bg-danger border-0 btn text-white">
-                                Clear
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <!-- END Search Form -->
             @if(count($products) > 0)
             <!-- All Products Table -->
             <div class="table-responsive">
