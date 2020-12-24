@@ -27,7 +27,7 @@ class ProductsController extends Controller
             $shop = $request->auth;
         }
         else {
-            $shop = Auth::user;
+            $shop = Auth::user();
         }
        
         $products = Product::where('store_id', $shop->id)->newQuery();
