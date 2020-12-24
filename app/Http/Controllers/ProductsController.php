@@ -25,6 +25,7 @@ class ProductsController extends Controller
         
         $shop = Auth::user();
         
+
         $products = Product::where('store_id', $shop->id)->newQuery();
 
         if($request->has('search')) {
@@ -32,7 +33,7 @@ class ProductsController extends Controller
         }
         $products = $products->latest()->paginate(20);
 
-        return redirect()->back()->with('products', $products)->with('search', $request->input('search'));
+        return view('products.index')->with('products', $products)->with('search', $request->input('search'));
     }
 
 
