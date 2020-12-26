@@ -71,7 +71,7 @@ class OrdersCreateJob implements ShouldQueue
      
             $response = Http::asForm()->post('https://larington.com/api/', [
                 'command' => 'issuepoints',
-                'platform' => '',
+                'platform' => 'shopifyapp',
                 'posted_sid' => $user->merchant_token,
                 'clubid' => $club->club_id,
                 'merchid' => $club->company_id,

@@ -18,6 +18,7 @@
       
       
       var base_url = 'https://phpstack-490736-1648925.cloudwaysapps.com';
+      //var base_url = "http:loyalty.test";
       var products = [];
       
       {% for item in cart.items %}
@@ -35,17 +36,28 @@
          }
        });
       
+      $(document).on('click', '.check-point-apply-btn', function(){
+        if($('.member').val() !== "") {
+          	$(this).hide();
+        	$('.points-section').show();
+        }
+      
+      });
+      
          $(document).on('click', '.point-apply-btn', function(){
                                
         $('.request-error').hide();
-        $(this).html('Loading..');
         
       	var club_id = $('.point-apply-club').val();
         var points = $('.point-applied').val();
         var member = $('.member').val();
-        
-        
-        $.ajax({
+           
+        if(member != '' && points != ''){
+          console.log(points);
+		        
+          $(this).html('Loading..');
+
+          $.ajax({
           url: `${base_url}/cart/apply/points`,
           data: { club_id : club_id, points : points, member : member },
           type: 'POST',
@@ -70,7 +82,9 @@
 
           }
         });
-        
+
+        }   
+             
       });
       
       
@@ -105,15 +119,16 @@
                 $('.member').val(response.member);
                 $('.point-applied').val(response.points);
                 $('.club_id').val(response.club_id);
-
-                jQuery.post('/cart/update.js', {
-                  attributes: {
-                    'club_id': response.club_id,
-                    'points' : response.points
-                  }
-                });
-
-                window.location.href = `/checkout?discount=${response.discount_code}`;
+              
+              jQuery.post('/cart/update.js', {
+                attributes: {
+                  'club_id': response.club_id,
+                  'points' : response.points
+                }
+              });
+              
+              
+              window.location.href = `/checkout?discount=${response.discount_code}`;
 
             }
 
@@ -121,10 +136,6 @@
         });
         
       });
-    
-    
-      
-      
-      
+         
 });	
 </script>
