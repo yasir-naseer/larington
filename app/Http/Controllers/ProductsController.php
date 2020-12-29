@@ -304,7 +304,7 @@ class ProductsController extends Controller
             'address' => $o['shipping_address']['address1']
         ];
 
-        dd(json_encode($data));
+       
 
     }
 }

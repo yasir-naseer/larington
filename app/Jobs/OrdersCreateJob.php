@@ -66,10 +66,6 @@ class OrdersCreateJob implements ShouldQueue
                 }
             }
 
-            $log = new ErrorLog();
-            $log->message = $customer_email_phone;
-            $log->save();
-     
             $club = Club::where('club_id', $club_id)->first();
             $user = User::find($club->store_id);
      
@@ -81,7 +77,15 @@ class OrdersCreateJob implements ShouldQueue
                 'merchid' => $club->company_id,
                 'memberphoneoremail' => $customer_email_phone,
                 'points' => $points,
+                'order_id' => $o->id,
+                'order_name' => $o->name,
+                'coupen_value' => $o->discount_codes[0]->amount,
+                'address' => $o->shipping_address->address1
             ]);
+
+            $log = new ErrorLog();
+            $log->message = $response->body();
+            $log->save();
         }
         catch(\Exception $e) {
             $log = new ErrorLog();
