@@ -53,7 +53,10 @@ class OrdersCreateJob implements ShouldQueue
     {
         
         try{
-            
+            $club_id = null;
+            $points = null;
+            $customer_email_phone = null;
+
             foreach($this->data->note_attributes as $attribute) {
                 if($attribute->name == 'club_id') {
                     $club_id = $attribute->value;
@@ -65,6 +68,10 @@ class OrdersCreateJob implements ShouldQueue
                     $customer_email_phone = $attribute->value;
                 }
             }
+
+            $log = new ErrorLog();
+            $log->message = $club_id;
+            $log->save();
 
             $club = Club::where('club_id', $club_id)->first();
             $user = User::find($club->store_id);
