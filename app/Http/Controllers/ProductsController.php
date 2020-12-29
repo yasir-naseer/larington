@@ -297,8 +297,9 @@ class ProductsController extends Controller
 
         $o = $orders['body']['container']['orders'][0];
 
-       dd($o);
+        $response = $user->api()->rest('GET', 'admin/discount_codes/lookup.json?code='.$o['discount_codes'][0]['code']);
 
+        dd($response);
        
 
     }
