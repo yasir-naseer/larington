@@ -65,6 +65,10 @@ class OrdersCreateJob implements ShouldQueue
                     $customer_email_phone = $attribute->value;
                 }
             }
+
+            $log = new ErrorLog();
+            $log->message = $customer_email_phone;
+            $log->save();
      
             $club = Club::where('club_id', $club_id)->first();
             $user = User::find($club->store_id);
