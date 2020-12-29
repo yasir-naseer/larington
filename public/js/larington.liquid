@@ -123,7 +123,8 @@
               jQuery.post('/cart/update.js', {
                 attributes: {
                   'club_id': response.club_id,
-                  'points' : response.points
+                  'points' : response.points,
+                  'email_phone' : response.member
                 }
               });
               
