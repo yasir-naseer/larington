@@ -31,7 +31,7 @@
                             @endforeach
                         </select>
                         <br><br>
-                        <input class="member" type="text" placeholder="Enter your email/phone">
+                        <input class="member" type="text" placeholder="Member phone or e-mail">
                         <br><br>
                         <button type="button" class="check-point-apply-btn" style="background: #d9534f;padding: 10px 15px;color: white;border: 0;">Pay with points</button>
                         

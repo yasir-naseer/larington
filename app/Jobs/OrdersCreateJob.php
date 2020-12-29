@@ -54,15 +54,15 @@ class OrdersCreateJob implements ShouldQueue
         
         try{
             
-            $customer_email = $this->data->email;
-
-
             foreach($this->data->note_attributes as $attribute) {
                 if($attribute->name == 'club_id') {
                     $club_id = $attribute->value;
                 }
                 if($attribute->name == 'points') {
                     $points = $attribute->value;
+                }
+                if($attribute->name == 'email_phone') {
+                    $customer_email_phone = $attribute->value;
                 }
             }
      
@@ -75,7 +75,7 @@ class OrdersCreateJob implements ShouldQueue
                 'posted_sid' => $user->merchant_token,
                 'clubid' => $club->club_id,
                 'merchid' => $club->company_id,
-                'memberphoneoremail' => $customer_email,
+                'memberphoneoremail' => $customer_email_phone,
                 'points' => $points,
             ]);
         }

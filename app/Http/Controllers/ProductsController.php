@@ -159,7 +159,8 @@ class ProductsController extends Controller
                 'success' => $result['message'],
                 'club_id' => $club->club_id,
                 'points' => $request->points,
-                'discount_code' => $discount_code
+                'discount_code' => $discount_code,
+                'member' => $request->member
             ]);
         }
         else if($result['res'] == -1) {
