@@ -85,10 +85,6 @@ class OrdersCreateJob implements ShouldQueue
                 'coupen_value' => $this->data->discount_codes[0]->amount,
                 'address' => $this->data->shipping_address->address1
             ]);
-
-            $log = new ErrorLog();
-            $log->message = $response->body();
-            $log->save();
         }
         catch(\Exception $e) {
             $log = new ErrorLog();
