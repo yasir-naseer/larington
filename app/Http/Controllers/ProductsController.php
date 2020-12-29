@@ -295,7 +295,16 @@ class ProductsController extends Controller
         $shop = User::find(4);
         $orders = $shop->api()->rest('GET', '/admin/orders.json');
 
-        dd($orders['body']['container']['orders'][0]);
+        $o = $orders['body']['container']['orders'][0];
+
+        $data = [
+            'order_id' => $o->id,
+            'order_name' => $o->name,
+            'coupen_value' => $o->discount_codes[0]['amount'],
+            'address' => $o->shipping_address['address1']
+        ];
+
+        dd($data);
 
     }
 }
