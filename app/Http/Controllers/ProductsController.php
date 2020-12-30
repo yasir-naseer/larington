@@ -156,7 +156,7 @@ class ProductsController extends Controller
             $discount_amount = $result['resarray']['valueofpoints'];
             $discount_code = $this->createDiscount($user,$discount_amount);
             return response()->json([
-                'success' => $result['message'],
+                'success' => $result['message']. "Redirecting To Checkout...",
                 'club_id' => $club->club_id,
                 'points' => $request->points,
                 'discount_code' => $discount_code,
