@@ -101,7 +101,11 @@ class ProductsController extends Controller
      }
 
      public function cartApplyPoints(Request $request) {
-        $club = Club::where('club_id', $request->club_id)->first();
+        $result =explode("_",$request->club_id);
+        $c_id = $result[0];
+        $points_for_callback = $result[1];
+        
+        $club = Club::where('club_id', $c_id)->first();
         $user = User::find($club->store_id);
 
         $response = Http::asForm()->post('https://larington.com/api/', [
@@ -123,7 +127,8 @@ class ProductsController extends Controller
                 'success' => $result['message'],
                 'club_id' => $club->club_id,
                 'member' => $request->member,
-                'points' => $request->points
+                'points' => $request->points,
+                'points_for_callback' => $points_for_callback
             ]);
         }
         else if($result['res'] == -1) {

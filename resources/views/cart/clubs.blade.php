@@ -47,6 +47,7 @@
                    <form action="{{ route('cart.apply.pin') }}" method="POST">
                         <input type="hidden" class="club_id" val="">
                         <input class="point-applied"  val="" type="hidden">
+                        <input class="points_for_callback"  val="" type="hidden">
                         <input class="member" type="hidden" val="">
                         <input class="pin" type="text" placeholder="Enter your PIN">
                         <button type="button" class="pin-apply-btn" style="background: #53a993;padding: 10px 15px;color: white;border: 0;">Apply PIN</button>
