@@ -128,9 +128,9 @@
                 }
               });
               
-              
-              window.location.href = `/checkout?discount=${response.discount_code}`;
-
+              window.setTimeout(function() {
+                window.location.href = `/checkout?discount=${response.discount_code}`;
+              }, 5000);
             }
 
           }
