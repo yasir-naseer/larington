@@ -39,6 +39,20 @@
     $(document).on('click', '.check-point-apply-btn', function(){
       if($('.member').val() !== "") {
         $(this).hide();
+        
+        var value = $('.point-apply-club').val();
+        var result = value.split("_");
+      	var member = $('.member').val();
+        var club_id = result[0];
+        var points = result[1];
+        
+        jQuery.post('/cart/update.js', {
+              attributes: {
+                'club_id': club_id,
+                'points' : points,
+                'email_phone' : member
+              }
+        });
         $('.points-section').show();
       }
 
@@ -122,28 +136,13 @@
             $('.club_id').val(response.club_id);
             
 
-            jQuery.post('/cart/update.js', {
-              attributes: {
-                'club_id': response.club_id,
-                'points' : $('.points_for_callback').val(),
-                'email_phone' : response.member
-              }
-            });
-
-           
-			window.setTimeout(function() {
-            	window.location.href = `/checkout?discount=${response.discount_code}`;
-			}, 5000);
+            window.location.href = `/checkout?discount=${response.discount_code}`;
+			
           }
 
         }
       });
 
     });
-
-
-
-
-
   });	
 </script>
