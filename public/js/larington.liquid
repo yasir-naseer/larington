@@ -1,142 +1,149 @@
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script>
-    $(document).ready(function(){
-      {%- if product.id %}  
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+  $(document).ready(function(){
+    {%- if product.id %}  
         var product_id = {{ product.id | null }};
         var base_url = 'https://phpstack-490736-1648925.cloudwaysapps.com';
 
-         $.ajax({
-           url: `${base_url}/products/get/clubs/${product_id}`,
-           type: 'GET',
-           success: function(res) {
-             var response = res;
+    $.ajax({
+      url: `${base_url}/products/get/clubs/${product_id}`,
+      type: 'GET',
+      success: function(res) {
+        var response = res;
 
-             $('.product-single__description').after(res);
-           }
-         });
-      {%- endif -%}
-      
-      
-      var base_url = 'https://phpstack-490736-1648925.cloudwaysapps.com';
-      //var base_url = "http:loyalty.test";
-      var products = [];
-      
-      {% for item in cart.items %}
-          products.push({{item.product.id}});
-      {% endfor %}
-      
-       $.ajax({
-         url: `${base_url}/cart/get/clubs`,
-         data: { products : products },
-         type: 'POST',
-         success: function(res) {
-           var response = res;
-           $('.cart-subtotal').html(res);
+        $('.product-single__description').after(res);
+      }
+    });
+    {%- endif -%}
 
-         }
-       });
-      
-      $(document).on('click', '.check-point-apply-btn', function(){
-        if($('.member').val() !== "") {
-          	$(this).hide();
-        	$('.points-section').show();
-        }
-      
-      });
-      
-         $(document).on('click', '.point-apply-btn', function(){
-                               
-        $('.request-error').hide();
-        
-      	var club_id = $('.point-apply-club').val();
-        var points = $('.point-applied').val();
-        var member = $('.member').val();
-           
-        if(member != '' && points != ''){
-         
-		        
-          $(this).html('Loading..');
 
-          $.ajax({
+    var base_url = 'https://phpstack-490736-1648925.cloudwaysapps.com';
+    //var base_url = "http:loyalty.test";
+    var products = [];
+
+    {% for item in cart.items %}
+    products.push({{item.product.id}});
+    {% endfor %}
+
+    $.ajax({
+      url: `${base_url}/cart/get/clubs`,
+      data: { products : products },
+      type: 'POST',
+      success: function(res) {
+        var response = res;
+        $('.cart-subtotal').html(res);
+
+      }
+    });
+
+    $(document).on('click', '.check-point-apply-btn', function(){
+      if($('.member').val() !== "") {
+        $(this).hide();
+        $('.points-section').show();
+      }
+
+    });
+
+    $(document).on('click', '.point-apply-btn', function(){
+
+      $('.request-error').hide();
+
+      var club_id = $('.point-apply-club').val();
+      var points = $('.point-applied').val();
+      var member = $('.member').val();
+
+      if(member != '' && points != ''){
+        console.log(points);
+
+        $(this).html('Loading..');
+
+        $.ajax({
           url: `${base_url}/cart/apply/points`,
           data: { club_id : club_id, points : points, member : member },
           type: 'POST',
           success: function(res) {
             var response = res;
-            
+
             if(response.error){
-                $('.point-apply-btn').html('Pay with points');
-            	$('.request-error').show().slideDown().html(response.error);
-               
+              $('.point-apply-btn').html('Pay with points');
+              $('.request-error').show().slideDown().html(response.error);
+
 
             }
             else if(response.success){
-            	$('.apply-point-div').hide();
-                $('.apply-pin-div').show();
-                $('.request-success').html(response.success);
-                $('.member').val(response.member);
-                $('.point-applied').val(response.points);
-                $('.club_id').val(response.club_id);
+              $('.apply-point-div').hide();
+              $('.apply-pin-div').show();
+              $('.request-success').html(response.success);
+              $('.member').val(response.member);
+              $('.point-applied').val(response.points);
+              $('.club_id').val(response.club_id);
+              $('.points_for_callback').val(response.points_for_callback);
 
             }
 
           }
         });
 
-        }   
-             
-      });
-      
-      
-      $(document).on('click', '.pin-apply-btn', function(){
-        $('.request-success').hide();
-        $('.pin-apply-btn').html('Loading..');
-        
-      	var club_id = $('.club_id').val();
-        var points = $('.point-applied').val();
-        var member = $('.member').val();
-        var pin = $('.pin').val();
-        
-        $.ajax({
-          url: `${base_url}/cart/apply/pin`,
-          data: { club_id : club_id, points : points, member : member, pin : pin },
-          type: 'POST',
-          success: function(res) {
-            var response = res;
-            
-            if(response.error){
-                $('.apply-pin-div').hide();
-                $('.pin-apply-btn').html('APPLY PIN');
-                $('.apply-point-div').show();
-            	$('.request-error').show().slideDown().html(response.error);
-            }
-            else if(response.success){
-            	$('.apply-point-div').hide();
-                $('.pin-apply-btn').html('APPLY PIN');
-                $('.apply-pin-div').show();
-                $('.request-success').html(response.success);
-                $('.request-success').show();
-                $('.member').val(response.member);
-                $('.point-applied').val(response.points);
-                $('.club_id').val(response.club_id);
-              
-              jQuery.post('/cart/update.js', {
-                attributes: {
-                  'club_id': response.club_id,
-                  'points' : response.points,
-                  'email_phone' : response.member
-                }
-              });
-              
-              window.setTimeout(function() {
-                window.location.href = `/checkout?discount=${response.discount_code}`;
-              }, 5000);
-            }
+      }   
 
+    });
+
+
+    $(document).on('click', '.pin-apply-btn', function(){
+      $('.request-success').hide();
+      $('.pin-apply-btn').html('Loading..');
+
+      var club_id = $('.club_id').val();
+      var points = $('.point-applied').val();
+      var member = $('.member').val();
+      var pin = $('.pin').val();
+
+      $.ajax({
+        url: `${base_url}/cart/apply/pin`,
+        data: { club_id : club_id, points : points, member : member, pin : pin },
+        type: 'POST',
+        success: function(res) {
+          var response = res;
+
+          if(response.error){
+            $('.apply-pin-div').hide();
+            $('.pin-apply-btn').html('APPLY PIN');
+            $('.apply-point-div').show();
+            $('.request-error').show().slideDown().html(response.error);
           }
-        });
-        
+          else if(response.success){
+            $('.apply-point-div').hide();
+            $('.pin-apply-btn').html('APPLY PIN');
+            $('.apply-pin-div').show();
+            $('.request-success').html(response.success);
+            $('.request-success').show();
+            $('.member').val(response.member);
+            $('.point-applied').val(response.points);
+            $('.club_id').val(response.club_id);
+            
+
+            jQuery.post('/cart/update.js', {
+              attributes: {
+                'club_id': response.club_id,
+                'points' : $('.points_for_callback').val(),
+                'email_phone' : response.member
+              }
+            });
+
+           
+			window.setTimeout(function() {
+            	window.location.href = `/checkout?discount=${response.discount_code}`;
+			}, 5000);
+          }
+
+        }
       });
-         
-});	
+
+    });
+
+
+
+
+
+  });	
 </script>

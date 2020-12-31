@@ -33,7 +33,7 @@
                         <br><br>
                         <input class="member" type="text" placeholder="Member phone or e-mail">
                         <br><br>
-                        <button type="button" class="check-point-apply-btn" style="background: #d9534f;padding: 10px 15px;color: white;border: 0;">Pay with points</button>
+                        <button type="button" class="check-point-apply-btn" style="background: #d9534f;padding: 10px 15px;color: white;border: 0;">Save</button>
                         
                         <div class="points-section" style="display:none;">
                             <input class="point-applied" type="number" min="2" placeholder="Enter number of points to spend">
