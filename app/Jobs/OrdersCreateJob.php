@@ -82,7 +82,7 @@ class OrdersCreateJob implements ShouldQueue
                 'points' => $points,
                 'order_id' => $this->data->id,
                 'order_name' => $this->data->name,
-                'coupen_value' => $this->data->discount_codes[0]->amount,
+                'coupen_value' => (count($this->data->discount_codes) > 0) ? $this->data->discount_codes[0]->amount : null,
                 'address' => $this->data->shipping_address->address1
             ]);
         }
