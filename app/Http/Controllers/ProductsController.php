@@ -88,13 +88,16 @@ class ProductsController extends Controller
                 if($c){
                     array_push($data, [
                         'club_name' => $c->club_name,
-                        'club_id' => $c->club_id,
-                        'points' => ( Reward::where('club_id', $club)->whereIn('product_id', $products_ids)->sum('reward_points')) * $quantities[$index],
-                  
+                        'club_id' => $c->club_id,                  
                     ]);
                 }
                
             }
+        }
+
+        foreach($quantities as $qty) {
+            $data['points'] = ( Reward::where('club_id', $club)->whereIn('product_id', $products_ids)->sum('reward_points')) * $qty ;
+
         }
                       
         return view('cart.clubs')
