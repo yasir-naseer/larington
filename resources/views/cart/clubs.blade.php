@@ -13,7 +13,7 @@
                     {{ $item['club_name'] }}
                 </td>
                 <td style="text-align:right;">
-                    {{ $item['points'] * $quantities[$index]}}
+                    {{ $item['points'] * $item['quantities']}}
                 </td>
             </tr>
             
