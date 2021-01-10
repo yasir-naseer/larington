@@ -126,7 +126,6 @@
                 <div class="content-header bg-white-5">
                     <!-- Logo -->
                     <a class="font-w600 text-dual"  target="_blank" href="https://larington.com">
-                        <i class="fa fa-circle-notch text-primary"></i>
                         <span class="smini-hide">
                             <span class="font-w700 font-size-h5">Larington</span>
                         </span>
