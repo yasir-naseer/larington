@@ -20,14 +20,16 @@
     var base_url = 'https://phpstack-490736-1648925.cloudwaysapps.com';
     //var base_url = "http:loyalty.test";
     var products = [];
+    var quantities = [];
 
     {% for item in cart.items %}
-    products.push({{item.product.id}});
+    	products.push({{item.product.id}});
+    	quantities.push({{item.quantity}});
     {% endfor %}
 
     $.ajax({
       url: `${base_url}/cart/get/clubs`,
-      data: { products : products },
+      data: { products : products, quantities : quantities },
       type: 'POST',
       success: function(res) {
         var response = res;
