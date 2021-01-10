@@ -90,7 +90,7 @@ class ProductsController extends Controller
                         'club_name' => $c->club_name,
                         'club_id' => $c->club_id,
                         'points' => Reward::where('club_id', $club)->whereIn('product_id', $products_ids)->sum('reward_points'),
-                        'quantity' => $quantities
+                        'quantities' => $quantities
                     ]);
                 }
                
