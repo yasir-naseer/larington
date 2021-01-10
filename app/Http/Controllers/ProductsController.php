@@ -77,6 +77,7 @@ class ProductsController extends Controller
     public function getClubsForCart(Request $request) {
         
         $products_ids = $request->products;
+        $quantities = $request->quantities;
 
         $clubs = array_unique(Reward::whereIn('product_id', $products_ids)->pluck('club_id')->toArray());
 
@@ -88,7 +89,8 @@ class ProductsController extends Controller
                     array_push($data, [
                         'club_name' => $c->club_name,
                         'club_id' => $c->club_id,
-                        'points' => Reward::where('club_id', $club)->whereIn('product_id', $products_ids)->sum('reward_points')
+                        'points' => Reward::where('club_id', $club)->whereIn('product_id', $products_ids)->sum('reward_points'),
+                        'quantity' => $quantities
                     ]);
                 }
                

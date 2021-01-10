@@ -7,13 +7,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($data as $item)
+        @foreach($data as $index => $item)
             <tr>
                 <td>
                     {{ $item['club_name'] }}
                 </td>
                 <td style="text-align:right;">
-                    {{ $item['points']}}
+                    {{ $item['points'] * $quantities[$index]}}
                 </td>
             </tr>
             
