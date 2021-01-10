@@ -13,7 +13,7 @@
                     {{ $item['club_name'] }}
                 </td>
                 <td style="text-align:right;">
-                    {{ $item[0]}}
+                    {{ $item['points']}}
                 </td>
             </tr>
             
@@ -27,7 +27,7 @@
                         <label for="">Choose Reward club</label>
                         <select name="club_id" id="" class="point-apply-club">
                             @foreach($data as $item)
-                                <option value="{{ $item['club_id'].'_'.$item[0] }}"> {{ $item['club_name'] }} </option>
+                                <option value="{{ $item['club_id'].'_'.$item['points'] }}"> {{ $item['club_name'] }} </option>
                             @endforeach
                         </select>
                         <br><br>
