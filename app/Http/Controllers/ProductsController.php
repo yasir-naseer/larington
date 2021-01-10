@@ -75,44 +75,27 @@ class ProductsController extends Controller
     }
 
     public function getClubsForCart(Request $request) {
-        
+
         $products_ids = $request->products;
         $quantities = $request->quantities;
 
         $clubs = array_unique(Reward::whereIn('product_id', $products_ids)->pluck('club_id')->toArray());
     
-        $club_count = 0;
         $data = [];
         if(count($clubs) > 0) {
-            foreach($clubs as $index => $club) {
+            foreach($clubs as $club) {
                 $c = Club::where('club_id',$club)->first();
+                $point = 0;
                 if($c){
-                    $club_count++;
-                }
-               
-            }
-        }
-
-        $new = [];
-        for($i=0; $i<$club_count; $i++) {
-            $new = array_merge($quantities, $quantities);
-        }
-
-
-
-        $points = [];
-
-        if(count($clubs) > 0) {
-            foreach($clubs as $index => $club) {
-                $c = Club::where('club_id',$club)->first();
-                if($c){
+                    foreach($products_ids as $index => $products) {
+                        $point = $point + Reward::where('club_id', $club)->where('product_id', $products)->sum('reward_points') * $quantities[$index];                        
+                    }
                     array_push($data, [
                         'club_name' => $c->club_name,
                         'club_id' => $c->club_id,  
-                        'points' => Reward::where('club_id', $club)->whereIn('product_id', $products_ids)->sum('reward_points') * $new[$index]                
-                    ]);
-                }
-               
+                        'points' => $point
+                    ]);  
+                } 
             }
         }
                       
